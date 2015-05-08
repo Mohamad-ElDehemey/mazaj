@@ -1,0 +1,104 @@
+.container-fluid>.navbar-collapse, .container-fluid>.navbar-header, .container>.navbar-collapse, .container>.navbar-header
+{
+	margin-left: 50px;
+}
+
+
+.navbar-brand{
+	margin-right: 25px;
+}
+
+
+.navbar-form
+{
+	margin-left: 180px;
+}
+
+.navbar-form .form-control{
+	width: 250px;
+}
+
+.navbar-default .navbar-nav>li>a
+{
+	margin-left: 20px;
+}
+
+.navbar-default .navbar-nav>.active>a{
+	background-color: none;
+}
+
+.upload-to{
+    border-bottom: 1px solid #ebebeb;
+    margin-left: 22.5%;
+    color: #ff6b6b;
+    font-size: 34px;
+    width: 720px;
+    margin-bottom: 50px;
+    
+}
+.upload-to h2{
+    border-bottom: 2px solid #d54542;
+    width: 199px;
+    margin-bottom: 0px;
+    padding-bottom: 10px;
+}
+.photo
+{
+	background-color: #ebebeb;
+	width: 200px;
+	height: 200px;
+	margin-left: 45%;
+}
+.photo i
+{
+	line-height: 150px;
+	margin-left: 50px;
+	font-size: 85px;
+	color: #f7f7f7;
+}
+.photo button
+{
+	text-align: center;
+	position: absolute;
+	left: 295px;
+	bottom: 15px;
+	border-radius: 2px;
+	background-color: #fafafa;
+	width: 150px;
+	height: 30px;
+
+}
+
+.upload  
+{
+	position: absolute;
+	left: 41%;
+	
+
+}
+
+
+
+.upload  input
+{
+	border-radius: 0px;
+	width: 500px;
+
+}
+.upload  textarea
+{
+	border-radius: 0px;
+	width: 500px;
+	height: 100px;
+}
+.upload button
+{
+	position: absolute;
+	right: 170px;
+	margin-top: 20px;
+	width: 120px;
+	border-radius: 1px;
+	border-color: #d54542;
+	background-color: #ff6b6b;
+
+}
