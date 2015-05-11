@@ -7,6 +7,7 @@ body{
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
     width: 30px;
+    height: 34px;
     padding-left: 7px;
     margin-left: -6px;
     border-left: none;
@@ -37,7 +38,6 @@ body{
 .navbar-brand{
     margin-left: 43px;
     width: 105px;
-    background-color: rgb(141, 211, 232);
     height: 51px;
     padding: 0;
 }
@@ -53,12 +53,6 @@ body{
     background-color: #bf0000;
     color: #fff;
     
-}
-.icon-music-outline{
-    margin-left:  20px;
-    margin-top: -5px;
-    font-size: 47px;
-    color: #fff;
 }
 .navbar-nav>li>.dropdown-menu{
     background-color: rgba(190, 0, 0, 0.73);
@@ -153,7 +147,7 @@ body{
 }
 .follow{
     margin-top: 25px;
-   
+    padding-bottom: 45px;   
 }
 .follow-1{
     margin-right: 15px;
@@ -163,7 +157,9 @@ body{
     float: left;
 }
 .follow-press{
-    width: 93px;
+    width: 130px;
+    height: 40px;
+    float: right;
     margin-left: 5px;
     margin-top:12px;
     color: rgb(131, 113, 113);
