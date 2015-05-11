@@ -3,6 +3,12 @@
     <title>Upload</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/upload_style.css">
+    <script type="text/javascript" src="jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery.form.min.js"></script>
+
+    <script type="text/javascript" src="js/uploader.js"></script>
+    <link href="css/uploader.css" rel="stylesheet" type="text/css">
+
   </head>
 <body>
   <nav class="navbar navbar-default">
@@ -80,6 +86,8 @@ upload
 
 </button>
 </form>
+
+
 </div>
 
 </div>
@@ -87,6 +95,21 @@ upload
 </section>
 
 
+
+<!-- test --!>
+<br><br>
+<div id="upload-wrapper">
+<div align="center">
+<form action="processupload.php" method="post" enctype="multipart/form-data" id="MyUploadForm">
+<input name="FileInput" id="FileInput" type="file" />
+<input type="submit"  id="submit-btn" value="Upload" />
+<img src="img/ajax-loader.gif" id="loading-img" style="display:none;" alt="Please Wait"/>
+</form>
+<div id="progressbox" ><div id="progressbar"></div ><div id="statustxt">0%</div></div>
+<div id="output"></div>
+</div>
+</div>
+<!-- test --!>
 
 
 
