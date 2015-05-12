@@ -1,0 +1,345 @@
+body{
+    background-color: #ffffff;
+    padding-top: 70px;
+}
+.nav-search{
+    margin-left: -2px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    width: 30px;
+    height: 34px;
+    padding-left: 7px;
+    margin-left: -6px;
+    border-left: none;
+}
+.navbar-form .form-control{
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    width: 430px;
+}
+.navbar-default-music{
+    background-color: rgb(217, 62, 59);
+}
+.navbar-default-music 
+.navbar-nav>li>a{
+    color: #fff;
+}
+.navbar-default-music 
+.navbar-nav>li>a:hover,
+.navbar-default-music 
+.navbar-nav>li>a:active,
+.navbar-default-music 
+.navbar-nav>li>a:focus{
+    color: rgb(141, 211, 232);
+}
+.navbar>.container 
+.navbar-brand, 
+.navbar>.container-fluid 
+.navbar-brand{
+    margin-left: 43px;
+    width: 105px;
+    height: 51px;
+    padding: 0;
+}
+.navbar-default-music 
+.navbar-nav>.active>a,
+.navbar-default-music
+.navbar-nav>.active>a:hover,
+.navbar-default-music
+.navbar-nav>.active>a:focus{
+    margin-left:  62px;
+    margin-right: 11px;
+    width: 74px;
+    background-color: #bf0000;
+    color: #fff;
+    
+}
+.navbar-nav>li>.dropdown-menu{
+    background-color: rgba(190, 0, 0, 0.73);
+    width:100%;
+}
+.dropdown-menu>li>a{
+    color: #fff;
+}
+.dropdown-menu>li>a:focus,
+.dropdown-menu>li>a:hover{
+    background-color: rgb(141, 211, 232);
+    color: #fff;
+    padding-left: 15%;
+    -webkit-transition:0.6s;
+    -moz-transition:0.6s;
+    -o-transition:0.6s;
+    transition: 0.6s;
+}
+.glyphicon-bell,.glyphicon-envelope{
+    font-size: 17px;
+}
+.navbar-default-music .navbar-nav>.open>a,
+.navbar-default-music .navbar-nav>.open>a:focus,
+.navbar-default-music .navbar-nav>.open>a:hover{
+    background-color: #bf0000;
+}
+.navbar-music{
+    margin-right: 100px;
+}
+
+/*end navebar*/
+
+.wrapper {
+  margin:0 5%;
+  width:85%;
+  font-family:sans-serif;
+  color:#555;
+  font-size:14px;
+  line-height:24px;
+}
+.tabs{
+    padding: 0px;
+    list-style: none;
+    border-bottom: 1px solid rgb(131, 113, 113);
+}
+.tabs li {
+   
+    float:left;
+    width:20%;
+
+  }
+ .tabs li  a {
+     display:block;
+     text-align:center;
+     text-decoration:none;
+     text-transform:uppercase;
+     color:#888;
+     padding:20px 0;
+     font-size: 20px;
+ }
+.tabs .active {
+    color: #bf0000;
+    border-bottom: 2px solid rgb(217, 62, 59);
+}
+.tabgroup div{
+   
+    padding:30px;
+
+  
+}
+.clearfix:after {
+  content:"";
+  display:table;
+  clear:both;
+}
+
+.follwer{
+    width: 100%;
+    
+}
+.to-follow {
+    border-bottom: 1px solid rgb(131, 113, 113);
+    padding-bottom: 7px;
+    margin-top:34px;
+}
+.to-follow  img{
+    margin-top: -4px;
+}
+.to-follow span{
+    font-size: 18px;
+    color: rgb(131, 113, 113);
+}
+.follow{
+    margin-top: 25px;
+    padding-bottom: 45px;   
+}
+.follow-1{
+    margin-right: 15px;
+    float: left;
+}
+.follow-2{
+    float: left;
+}
+.follow-press{
+    width: 130px;
+    height: 40px;
+    float: right;
+    margin-left: 5px;
+    margin-top:12px;
+    color: rgb(131, 113, 113);
+  
+}
+.All-follower{
+    margin-bottom: 50px;
+}
+.likes{
+    border-bottom: 1px solid rgb(131, 113, 113);
+    color: rgb(131, 113, 113);
+    font-size: 18px;
+}
+.glyphicon-heart{
+    font-size: 18px;
+    color: rgb(131, 113, 113);
+    padding-bottom: 5px;
+    padding-right: 10px;
+}
+.icon-users{
+    font-size: 18px;
+    color: rgb(131, 113, 113);
+    padding-right: 10px;
+}
+.view-all a{
+    float:right;
+    text-decoration: none;
+    color: rgb(131, 113, 113);
+}
+.like{
+    margin-top: 10px;
+      padding-top: 15px;
+}
+.like-1{
+    float: left;
+    margin-right: 15px;
+}
+.audio-player {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+.info h1 {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 13pt;
+	font-weight: 600;
+	text-transform: uppercase;
+	color: rgb(255, 255, 255);
+	cursor: default;
+}
+. info h4 {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 8pt;
+	font-weight: 400;
+	cursor: default;
+}
+.info h2 {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 13pt;
+	font-weight: 300;
+	color: rgb(255, 255, 255);
+	cursor: default;
+}
+.player {
+	height: 190px;
+	width: 100%;
+	background-color: rgb(217, 62, 59);
+	position: relative;
+	border-radius: 7px;
+	border-bottom-left-radius: 100px;
+	border-top-left-radius: 100px;
+
+}
+.player ul {
+	list-style: none;
+}
+.player ul li {
+	display: inline-block;
+}
+.info{
+    padding-top: 20px;
+}
+#arm{
+	width: 90px;
+	height: 90px;
+	position: absolute;
+	z-index: 1;
+	top: 15px;
+	left: 110px;
+	transform-origin: 77.5% 18.5%;
+	transform: rotate(-45deg);
+	background-image: url(http://i.imgur.com/Bzzqadh.png);
+	background-size: cover;
+}
+.artwork {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 190px;
+	width: 190px;
+	background: url(http://i.imgur.com/3idGgyU.png), url(http://i.imgur.com/Fu2Oezw.png) center no-repeat;
+	background-size: 190px, 75px !important;
+}
+.artwork img {
+  position: absolute;
+  height: 72px;
+  width: 72px;
+  border-radius: 50px;
+  top: 59px;
+  left: 59px;
+}
+.info h1 {
+	margin: 0 0 -10px;
+	margin-left: 180px;
+	width: 182px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.info h4 {
+	line-height: 20px;
+	color: rgb(99, 99, 103);
+	margin-left: 180px;
+	width: 182px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.info h2 {
+	margin-left: 180px;
+	width: 182px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.button-items {
+	margin-left: 180px;
+}
+
+/* Start profile page*/
+.profile-img{
+      margin-top: 30px;
+}
+.profile-name {
+    padding-left: 20px;
+    padding-top: 10px;
+    font-size: 24px;
+    padding-bottom: 5px;
+}
+.profile-Live {
+    padding-left: 20px;
+    padding-bottom: 10px;
+}
+.num-of-follower {
+    padding-left: 20px;
+}
+.num-of-follower .icon-users {
+}
+
+
+/* guest nav 
+==================
+*/
+
+.nav-div{
+
+  padding-top:10px;
+}
+
+#geust-logo:link,
+#geust-logo:visited{
+
+  
+  color: #fff;
+  display: inline-block;
+  padding-top: 8px;
+}
+
+#register-modal .alert{
+
+  display: none;
+}
