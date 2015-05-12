@@ -72,6 +72,55 @@
 </div><!-- /.modal -->
 
     <!-- Egister modal end-->
+
+
+     <!-- Login modal begin-->
+      <div class="modal fade" id="login-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Login</h4>
+      </div>
+       
+  {!!Form::open(['url'=>URL::to('user/new')])!!}
+      <div class="modal-body">
+
+        <div class="form-group">
+           <label for="email">Email :</label>
+           {!!Form::input('email','email',Input::old('email'),['id'=>'lgn-email','placeholder'=>'email@site.com','class'=>'form-control'])!!}
+        </div>
+
+        <div class="form-group">
+          <p class="alert alert-danger" id='lgn-alert-email'>
+            
+          </p>
+        </div>
+
+        <div class="form-group">
+           <label for="password">Password :</label>
+           {!!Form::input('password','password',Input::old('password'),['id'=>'lgn-pass','class'=>'form-control'])!!}
+        </div>
+
+        <div class="form-group">
+          <p class="alert alert-danger" id='lgn-alert-password'>
+            
+          </p>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="login-btn">Login</button>
+      </div>
+    {!!Form::close()!!}
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+    <!-- Login modal end-->
+
     <body>
     @if(Auth::check())
         <nav class="navbar navbar-default navbar-default-music navbar-fixed-top">

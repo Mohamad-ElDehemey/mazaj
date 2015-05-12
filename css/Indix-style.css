@@ -339,7 +339,8 @@ body{
   padding-top: 8px;
 }
 
-#register-modal .alert{
+#register-modal .alert,
+#login-modal .alert{
 
   display: none;
 }

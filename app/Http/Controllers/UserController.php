@@ -45,9 +45,41 @@ class UserController extends Controller {
 	}
 
 	// LOGIN
+	public function postLogin(Request $request){
 
-	public function postLogin(){
+		$validator = Validator::make($request->all(),[
 
+				'email' 	=>'required|email',
+				'password'	=>'required'
+			]);
+		$messages = array('error'=>'true');
+		if($validator->fails()){
+
+			$messages['email']=$validator->errors()->first('email');
+			$messages['password']=$validator->errors()->first('password');
+
+			
+		
+		}else{
+
+			//check email
+			$user = User::where('email','=',$request->get('email'))->first();
+			if(!$user){
+
+				$messages['email'] ='That email is not found at all! You can register a new account.';
+
+			}else{
+
+				if (Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')]))
+			        {
+			           $messages['error'] ='false';
+			        }else{
+
+			        	$messages['password'] = 'Check your password again!';
+			        }
+			}
+		}
+		return json_encode($messages);
 	}
 
 	public function getLogout(){
