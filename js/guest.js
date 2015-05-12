@@ -95,9 +95,12 @@ function main(){
 		});
 		
 
-
-
 	});
+
+	$('#feed-tabs a').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
 }
 
 function error_message(item,id){

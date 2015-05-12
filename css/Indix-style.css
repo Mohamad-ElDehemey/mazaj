@@ -344,3 +344,9 @@ body{
 
   display: none;
 }
+
+.tab-head{
+
+  font-size: 26px;
+  color:#b7b7b7;
+}
