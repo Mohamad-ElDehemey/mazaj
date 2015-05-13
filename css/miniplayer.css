@@ -1,0 +1,81 @@
+.miniplayer {
+	position: relative;
+	margin-left: 121px;
+	margin-top: 40px
+}
+
+#playtoggle {
+	position: absolute;
+	top: 9px;
+	right: 10px;
+	width: 30px;
+	height: 30px;
+	background: url(../img/player.png) no-repeat -30px 0;
+	cursor: pointer;
+}
+
+#playtoggle.playing {
+	background-position: 0 0;
+}
+
+#playtoggle:active {
+	top: 10px;
+}
+
+#timeleft {
+	color: #FFE5E5;
+	line-height: 48px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 50px;
+	text-align: center;
+	font-size: 11px;
+	font-weight: bold;
+	text-shadow: 0 1px 0 #546374;
+}
+
+
+#gutter {
+	position: absolute;
+	top: 19px;
+	left: 50px;
+	right: 50px;
+	height: 1px;
+	padding: 2px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	border-radius: 5px;
+	background-color: #D66260;
+}
+
+
+#loading {
+	background: #fff;
+	background: #DF9190;
+	-webkit-box-shadow: 0 1px 0 #fff inset, 0 1px 0 #141e28;
+	-moz-box-shadow: 0 1px 0 #fff inset, 0 1px 0 #141e28;
+	-o-box-shadow: 0 1px 0 #fff inset, 0 1px 0 #141e28;
+	box-shadow: 0 1px 0 #fff inset, 0 1px 0 #141e28;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
+	display: block;
+	float: left;
+	min-width: 6px;
+	height: 6px;
+}
+
+#handle {
+	position: absolute;
+	top: -5px;
+	left: 0;
+	width: 20px;
+	height: 20px;
+	margin-left: -10px;
+	background: url(../img/Indicator.png) no-repeat;
+	cursor: pointer;
+}
+
