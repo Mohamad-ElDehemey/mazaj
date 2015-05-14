@@ -14,7 +14,7 @@
         {!!Html::style('css/Indix-style.css')!!}
 
     </head>
-
+@if(!Auth::check())
     <!-- Register modal begin-->
       <div class="modal fade" id="register-modal">
   <div class="modal-dialog">
@@ -120,8 +120,70 @@
 </div><!-- /.modal -->
 
     <!-- Login modal end-->
+@endif
+
 
     <body>
+ <!-- messages modal start -->
+  @if(Auth::check())
+<div class="modal fade" id='mazaj-messages'>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-4" id='messages-lt'>
+             <div class="container-fluid">
+
+                <div class="row message-row message-active" msg =''>
+                 <div class="col-lg-4">
+                   <img class="img-thumbnail" src="" />
+                 </div>
+                 <div class="col-lg-8">
+                   <p class='sender-name'></p>
+                   <p class='time'></p>
+                 </div>
+               </div>
+
+               <div class="row message-row" msg ='1'>
+                 <div class="col-lg-4">
+                   <img class="img-thumbnail" />    </div>
+                 <div class="col-lg-8">
+                   <p class='sender-name'></p>
+                   <p class='time'></p>
+                 </div>
+               </div>
+
+             </div>
+            </div>
+
+            <div class="col-lg-8" id='messages-rt'>
+              <p id='msg-content'>
+              </p>
+              {!!Form::open(['url'=>URL::to('/'),'id'=>'reply-area'])!!}
+              <div class="form-group">
+             <textarea class="form-control" rows="3" name='message-content'></textarea>
+            </div>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" id='send-message'>Send</button>
+          {!!Form::close()!!}
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+  @endif
+ <!-- messages modal end -->   
     @if(Auth::check())
         <nav class="navbar navbar-default navbar-default-music navbar-fixed-top">
           <div class="container-fluid">
@@ -162,28 +224,23 @@
                         <li><a href="{{URL::to('user/logout')}}">Log out</a></li>
                       </ul>
                   </li>     
-                  <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-bell"></span> </a>
-                      <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
-                      </ul>
-                  </li>  
-                  <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-envelope"></span></a>
-                      <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
-                      </ul>
-                  </li>
+                 
+                 <li id='show-notif'>
+                 <a href="#" class="btn btn-link"><i class="fa fa-bell"></i></a>
+                   <span class="navbar-text mazaj-count ">
+                      
+                  </span>
+                 </li>
+
+                 <li id='show-msg'>
+                 <a href="#" class="btn btn-link"><i class="fa fa-envelope"></i></a>
+                   <span class="navbar-text mazaj-count ">
+                     
+                  </span>
+                 </li>
+
+
+                     
               </ul>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
@@ -242,7 +299,7 @@
 
                   <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
                     <h1 class='tab-head'>
-                      Here are the latest posts from people you are following!
+                     Hear the latest posts from the people you're following
                     </h1>
 
                     <div class="tab-content">

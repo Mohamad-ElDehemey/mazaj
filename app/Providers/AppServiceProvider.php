@@ -1,7 +1,9 @@
 <?php namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
+use App\Message;
+use Auth;
+use View;
 class AppServiceProvider extends ServiceProvider {
 
 	/**
@@ -12,6 +14,8 @@ class AppServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		//
+	
+		
 	}
 
 	/**

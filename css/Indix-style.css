@@ -350,3 +350,76 @@ body{
   font-size: 26px;
   color:#b7b7b7;
 }
+
+#messages-lt{
+  
+  overflow-x:hidden;
+  overflow-y:auto;
+  max-height:500px;
+  
+}
+
+.message-row{
+  
+  border-bottom:1px solid #ccc;
+  padding-bottom:5px;
+  padding-top: 5px;
+  cursor: pointer;
+}
+
+.message-row:hover,
+.message-active{
+
+  background: rgba(52, 152, 219,0.3);
+}
+
+.message-row:last-child{
+  border-bottom:none;
+}
+
+#reply-area{
+
+  margin-top:30px;
+  padding-top:30px;
+  border-top:1px solid #ccc;
+}
+
+.sender-name{
+
+  font-weight: bold;
+  color:#3498db;
+}
+
+.mazaj-count{
+
+  display: inline-block;
+  font-family: Tahoma;
+  font-size: 10px;
+  color: #fff !important;
+  width:20px;
+  height: 20px;
+  text-align: center;
+  position: absolute;
+  background: #3498db;
+  border-radius:3px;
+  line-height: 20px;
+  vertical-align: middle;
+  box-shadow: 0 0 2px rgba(125, 127, 120, 1.0);
+
+  top:-5px;
+  right:-15px;
+  
+  display: none;
+
+}
+
+#show-msg>a,#show-notif>a{
+
+  position: relative;
+}
+
+#show-notif .fa,#show-msg .fa{
+  line-height: 10px;
+  font-size: 20px;
+}
+

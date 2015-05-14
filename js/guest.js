@@ -1,6 +1,61 @@
 jQuery(document).ready(main);
 function main(){
 
+	//retrieve messages cout
+	$.ajax({
+		url: BASE+'/message/msgcount',
+		type: 'GET',
+		success:function(result){
+
+			if(result!='0'){
+
+				$('#show-msg .mazaj-count').html(result);
+				$('#show-msg .mazaj-count').fadeIn('slow');
+			}
+		}
+	});
+
+	// Messages control
+	var fetched = false ;
+	var firstFetch = true;
+
+	$('#show-msg').click(function(event) {
+		
+		event.preventDefault();
+		$('#mazaj-messages').modal('show');
+		$('#show-msg .mazaj-count').fadeOut('slow');
+		// retrieve first message
+
+		if(!fetched || firstFetch){
+
+			$.ajax({
+			url: BASE+'/message/firstmsg',
+			type:'GET',
+			success:function(result){
+
+				msg = JSON.parse(result);
+				if(msg.sender.length != 0){
+
+					$('.message-active .img-thumbnail').attr({src: msg.avatar});
+					$('.message-active .sender-name').html(msg.sender);
+					$('.message-active .time').html(msg.time);
+					$('#msg-content').html(msg.content);
+					$('.message-active').attr({msg:msg.id});
+					fetched = true;
+					firstFetch = false;
+				}
+			}
+		});// ajax end
+		}
+		
+	});
+
+
+	
+	
+
+	
+
 	$('#show-register').click(function(event) {
 		event.preventDefault();
 		$('#register-modal').modal('show');
@@ -101,6 +156,8 @@ function main(){
   e.preventDefault()
   $(this).tab('show')
 })
+
+	
 }
 
 function error_message(item,id){

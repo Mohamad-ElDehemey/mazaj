@@ -13,3 +13,4 @@
 
 Route::get('/','FeedController@index');
 Route::controller('user', 'UserController');
+Route::controller('message','MessageController');
