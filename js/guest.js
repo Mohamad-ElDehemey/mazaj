@@ -35,6 +35,7 @@ function main(){
 
 						msgId = $(this).attr('msg');
 						element = $(this);
+						element.removeClass('new-msg');
 						$.ajax({
 							url: BASE+'/message/readmsg/'+msgId,
 							type: 'GET',
@@ -43,8 +44,42 @@ function main(){
 								$('.message-active').removeClass('message-active');
 								element.addClass('message-active');
 								$('#msg-content').html(result);
+
 							}
 						})
+					});
+
+					// reply to message
+					$('#send-message').click(function(event) {
+						event.preventDefault();
+						msgID = $('.message-active').attr('msg');
+						url = $('#reply-area').attr('action');
+						btn = $(this);
+						loading = '<i class="fa fa-spinner fa-spin"></i>';
+						btn_old = 'Send';
+
+						btn.html(loading);
+
+						$.ajax({
+							url: url,
+							type: 'POST',
+							data: {
+								'_token': $('input[name=_token]').val(),
+								'id'	:msgID,
+								'content':$('#reply-content').val()
+							},
+							success:function(result){
+								console.log(result);
+							}
+
+						})
+						.done(function() {
+							btn.html(btn_old);
+						
+
+						})
+						
+
 					});
 
 				}

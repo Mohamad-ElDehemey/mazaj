@@ -6,6 +6,7 @@ use App\Message;
 use Illuminate\Http\Request;
 use Auth;
 use App\User;
+use Validator;
 
 class MessageController extends Controller {
 
@@ -45,13 +46,11 @@ class MessageController extends Controller {
 
 		if(!$id){
 
-			$content = Message::where('receiver_id','=',Auth::check())->get()->sortByDesc('created_at')->first();
-			if($content->new){
+			$msg = Message::where('receiver_id','=',Auth::user()->id)->orderBy('created_at', 'desc')->get();
+			if($msg->count()){
 
-				$content->new = false;
-				$content->save();
+				$content = $msg[0]->content;
 			}
-			$content = $content->content;
 		}
 		else{
 
@@ -77,6 +76,40 @@ class MessageController extends Controller {
 
 		}
 		return $content;
+	}
+
+	// reply message
+	public function postSend(Request $request){
+
+		if(Auth::check()){
+
+			$validator = Validator::make($request->all(),['content'=>'required']);
+			if($validator->passes()){
+
+				
+				if($request->get('id')){
+
+					$msg = Message::find($request->get('id'));
+					$new_msg = Message::Create([
+
+					'content' =>$request->get('content'),
+					'sender_id' =>Auth::user()->id,
+					'receiver_id' =>$msg->sender_id
+				]);
+
+				}else{
+
+
+					// new msg
+				}
+
+					
+
+			}
+		}
+
+
+
 	}
 
 

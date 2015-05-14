@@ -155,9 +155,9 @@
             <div class="col-lg-8" id='messages-rt'>
               <p id='msg-content'>
               </p>
-              {!!Form::open(['url'=>URL::to('/'),'id'=>'reply-area'])!!}
+              {!!Form::open(['url'=>URL::to('message/send'),'id'=>'reply-area'])!!}
               <div class="form-group">
-             <textarea class="form-control" rows="3" name='message-content'></textarea>
+             <textarea class="form-control" rows="3" name='message-content' id='reply-content'></textarea>
             </div>
             </div>
             
