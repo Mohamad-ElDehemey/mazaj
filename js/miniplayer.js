@@ -54,6 +54,7 @@ function initAudio() {
 			</p>';									
 //			$("#listen").html(player);
 			$("div[id=miniplayer]").html(playerbox);
+			$("div[id=miniplayer]").attr("style", "width:80%;height:175px;background-color:#D54542;border-top-left-radius:15px;border-top-right-radius:15px;border-bottom-left-radius:15px;border-bottom-right-radius:15px;padding:0px")
 			$("div[id=listen]").html(player);
 
 
