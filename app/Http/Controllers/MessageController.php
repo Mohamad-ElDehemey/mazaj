@@ -22,40 +22,61 @@ class MessageController extends Controller {
 		
 	}
 
-	public function getFirstmsg(){
+	// load messages
 
-		$msg = array('sender'=>'');
+	public function getMsgs(){
 
-		$message = Message::where('receiver_id','=',Auth::user()->id)->get()->sortByDesc('created_at')->first();
-		if($message){
+		if(Auth::check()){
 
-			$sender = User::find($message->sender_id);
-			$email =$sender->email;
-			$size = 150;
-			$avatar = '';
+		$msgs = Message::with(['sender'])->where('receiver_id','=',Auth::user()->id)->get()->sortByDesc('created_at');
+		return View('msgs')->with('msgs',$msgs);
 
-			$msg['sender'] 	=$sender->username;
-			$msg['avatar']  ="http://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?d=" . urlencode( $avatar ) . "&s=" . $size;
-			$msg['content'] =$message->content;
-			$msg['time']	=date('d-F-Y',strtotime($message->created_at));
-			$msg['id']		=$message->id;
-			
 		}
 
-		return json_encode($msg);
-	}
-
-
-	// mark as read
-	public function postMarkread($id){
-
+		
 
 	}
 
 	// read a message
-	public function getReadmsg($id){
+	public function getReadmsg($id=0){
 
-		return 'Msg from Folan';
+		$content = '';
+		if(Auth::check()){
+
+		if(!$id){
+
+			$content = Message::where('receiver_id','=',Auth::check())->get()->sortByDesc('created_at')->first();
+			if($content->new){
+
+				$content->new = false;
+				$content->save();
+			}
+			$content = $content->content;
+		}
+		else{
+
+			$content = Message::where('id','=',$id)->first();
+			if($content){
+
+				if($content->receiver_id == Auth::user()->id){
+
+					if($content->new){
+
+						$content->new = false;
+						$content->save();
+
+					}
+					$content = $content->content;
+
+				}
+
+			}
+
+		}
+		
+
+		}
+		return $content;
 	}
 
 

@@ -1,52 +1,81 @@
 jQuery(document).ready(main);
 function main(){
 
-	//retrieve messages cout
+	//retrieve messages count
 	$.ajax({
 		url: BASE+'/message/msgcount',
 		type: 'GET',
 		success:function(result){
 
-			if(result!='0'){
-
-				$('#show-msg .mazaj-count').html(result);
-				$('#show-msg .mazaj-count').fadeIn('slow');
-			}
+			
 		}
 	});
 
-	// Messages control
-	var fetched = false ;
-	var firstFetch = true;
+	// retrieve latest messages
+	var fetched = false;
+
+	if(!fetched){
+
+			$.ajax({
+
+		url:BASE+'/message/msgs',
+		type:'GET',
+		success:function(result){
+
+			$.ajax({
+				url: BASE+'/message/msgs',
+				type: 'GET',
+				success:function(result){
+
+					$('#messages-lt>.container-fluid').html(result);
+					$('.message-row:first-child').addClass('message-active');
+
+					// retrieve message content
+					$('.message-row').click(function(){
+
+						msgId = $(this).attr('msg');
+						element = $(this);
+						$.ajax({
+							url: BASE+'/message/readmsg/'+msgId,
+							type: 'GET',
+							success:function(result){
+
+								$('.message-active').removeClass('message-active');
+								element.addClass('message-active');
+								$('#msg-content').html(result);
+							}
+						})
+					});
+
+				}
+				
+			})
+			
+
+		}
+
+	});
+
+	}
+
+	// Retrieve first message content
+	$.ajax({
+		url: BASE+'/message/readmsg',
+		type: 'GET',
+		success:function(result){
+
+			$('#msg-content').html(result);
+		}
+	});
+	
+
 
 	$('#show-msg').click(function(event) {
 		
 		event.preventDefault();
 		$('#mazaj-messages').modal('show');
 		$('#show-msg .mazaj-count').fadeOut('slow');
-		// retrieve first message
 
-		if(!fetched || firstFetch){
-
-			$.ajax({
-			url: BASE+'/message/firstmsg',
-			type:'GET',
-			success:function(result){
-
-				msg = JSON.parse(result);
-				if(msg.sender.length != 0){
-
-					$('.message-active .img-thumbnail').attr({src: msg.avatar});
-					$('.message-active .sender-name').html(msg.sender);
-					$('.message-active .time').html(msg.time);
-					$('#msg-content').html(msg.content);
-					$('.message-active').attr({msg:msg.id});
-					fetched = true;
-					firstFetch = false;
-				}
-			}
-		});// ajax end
-		}
 		
 	});
 

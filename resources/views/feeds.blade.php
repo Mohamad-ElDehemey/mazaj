@@ -149,15 +149,6 @@
                  </div>
                </div>
 
-               <div class="row message-row" msg ='1'>
-                 <div class="col-lg-4">
-                   <img class="img-thumbnail" />    </div>
-                 <div class="col-lg-8">
-                   <p class='sender-name'></p>
-                   <p class='time'></p>
-                 </div>
-               </div>
-
              </div>
             </div>
 
