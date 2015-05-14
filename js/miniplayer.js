@@ -55,13 +55,19 @@ function initAudio() {
 //			$("#listen").html(player);
 			$("div[id=miniplayer]").html(playerbox);
 			$("div[id=miniplayer]").attr("style", "width:80%;height:175px;background-color:#D54542;border-top-left-radius:15px;border-top-right-radius:15px;border-bottom-left-radius:15px;border-bottom-right-radius:15px;padding:0px")
-			$("div[id=listen]").html(player);
+			$("div[id=listen]:not(.mainplayer)").html(player);
+//			$("div[id=listen].mainplayer").html(player);
+			if($("div[id=listen].mainplayer").html() == "")
+			{
+				$("div[id=listen].mainplayer").html(player);
 
+			}
 
 		//$("#listen").each(function( index ) {
 		//$("#listen").css({"color": "red", "border": "2px solid red"});
 
-		audio = $('.miniplayer audio').get(0);
+//		audio = $('.miniplayer audio').get(2); //third one [main]
+		audio = $("div[id=listen].mainplayer audio").get(0); //select main player
 		loadingIndicator = $('.miniplayer #loading');
 		positionIndicator = $('.miniplayer #handle');
 		timeleft = $('.miniplayer #timeleft');
