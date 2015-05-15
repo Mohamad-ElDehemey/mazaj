@@ -11,8 +11,58 @@
         <script src="js/bootstrap.min.js"></script>
         <script src="js/loader.js"></script>
         <script src="js/jquery.ui.min.js"></script>		
-
         <link rel="stylesheet" href="css/Indix-style.css">
+
+	<script>
+		function like(thisObj) {
+			var trackid = thisObj.parents("div").eq(2).attr("title");
+			alert("like");
+			<!-- <?php sql update table where .. = trackid?> -->
+		};
+		function repost(thisObj) {
+			var trackid = thisObj.parents("div").eq(2).attr("title");
+			alert("repost");
+			<!-- <?php sql update table where .. = trackid?> -->
+		};
+		function played(thisObj) {
+			var trackid = thisObj.parents("div").eq(2).attr("title");
+			alert("played");
+			<!-- <?php sql update table where .. = trackid?> -->
+		};
+		function paused(thisObj) {
+			var trackid = thisObj.parents("div").eq(2).attr("title");
+			alert("paused");
+			<!-- <?php sql update table where .. = trackid?> -->
+		};
+		function ended(thisObj) {
+			<!-- strip from url -->
+			alert(thisObj.attr('src'));
+			<!-- <?php sql update table where .. = trackid?> -->
+		};
+
+		function seeked(thisObj) {
+			alert("seeked");
+			<!-- <?php sql update table where .. = trackid?> -->
+		};
+		function next(thisObj,val) {
+			$("#player").find('#handle')
+			alert(thisObj + '\n' + val + '.wav');
+			<!-- <?php sql update table where .. = trackid?> -->
+		};
+		function nexttrack(thisObj) {
+			var trackid = thisObj.parents("div").eq(2).next(".miniplayer").attr('title');
+			alert(thisObj.next("#miniplayer").attr('title'));
+			alert(trackid);
+			<!-- <?php sql update table where .. = trackid?> -->
+		};
+
+
+		function prev(thisObj,val) {
+			<!-- <?php sql update table wher .. = trackid?> -->
+		};
+
+	</script>
+
     </head>
     <body>
         <nav class="navbar navbar-default navbar-default-music navbar-fixed-top">

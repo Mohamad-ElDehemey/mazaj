@@ -15,20 +15,18 @@ function initAudio() {
 			manualSeek = false;
 
 	if (supportsAudio) {
-		
-		var episodeTitle = '1';//$('body')[0].id;
 		var playerbox = '<div style="float:left;height:175px;width:35%">\
                         <img src="uploads/0/cover.png" style="height:170px;width:175px;margin-top:-27px;margin-left:-27px;border-top-left-radius:15px;border-top-right-radius:15px;border-bottom-left-radius:15px;border-bottom-right-radius:15px"></img>\
                         </div>\
                         <div style="height:100%">\
                         <div id="player_controls" style="float:left;margin-left:-35px;margin-top:-45px;display:inline-block">\
-                        <div id = "prev" style="background-image: url(' + "'" + 'img/backward.png' + "'" + ');background-repeat:no-repeat;display:inline-block;"></div>\
-                        <div id = "play" style="background-image: url(' + "'" + 'img/play.png' + "'" + ');background-repeat:no-repeat;display:inline-block;margin-bottom:5px;margin-left:-15px;"></div>\
-                        <div id = "next" style="background-image: url(' + "'" + 'img/forward.png' + "'" + ');background-repeat:no-repeat;display:inline-block;margin-left:-10px;"></div>\
+                        <div id = "prev" onclick="prevtrack( $(this) )"></div>\
+                        <span id = "playtoggle"></span>\
+                        <div id = "next" onclick="nexttrack( $(this) )"></div>\
                         </div>\
                         <div id="like_repost_controls" style="float:right;display:inline-block;width:130px;margin-top:-30px;margin-right:-55px">\
-                        <div id = "repost" style="background-image: url(' + "'" + 'img/repost.png' + "'" + ');background-repeat:no-repeat;display:inline-block;margin-left:-10px;padding:10px;"></div>\
-                        <div id = "like" style="background-image: url(' + "'" + 'img/like.png' + "'" + ');background-repeat:no-repeat;display:inline-block;margin-left:10px;padding:10px;"></div>\
+                        <div id = "repost" onclick="repost( $(this) )" style="background-image: url(' + "'" + 'img/repost.png' + "'" + ');background-repeat:no-repeat;display:inline-block;margin-left:-10px;padding:10px;"></div>\
+                        <div id = "like" onclick="like( $(this) )" style="background-image: url(' + "'" + 'img/like.png' + "'" + ');background-repeat:no-repeat;display:inline-block;margin-left:10px;padding:10px;"></div>\
                         </div>\
                         <div id="like_repost_results" style="float:right;display:inline-block;width:130px;margin-top:-30px;margin-right:-55px;padding:0px">\
                         <div id = "repost" style="margin-left:-20px;display:inline-block;width:10%;padding-top:0px;color:#ED8685">1111</div>\
@@ -48,18 +46,18 @@ function initAudio() {
 			<span id="loading" />\
 			<span id="handle" class="ui-slider-handle" />\
 			</span>\
-                        <span id="playtoggle" />\
 			<audio preload="metadata">\
 			</audio>\
 			</p>';									
 //			$("#listen").html(player);
 			$("div[id=miniplayer]").html(playerbox);
+			$("<br>").insertAfter($("div[id=miniplayer]"));
 			$("div[id=miniplayer]").attr("style", "width:80%;height:175px;background-color:#D54542;border-top-left-radius:15px;border-top-right-radius:15px;border-bottom-left-radius:15px;border-bottom-right-radius:15px;padding:0px")
 			$("div[id=listen]:not(.mainplayer)").html(player);
 //			$("div[id=listen].mainplayer").html(player);
 			if($("div[id=listen].mainplayer").html() == "")
 			{
-				$("div[id=listen].mainplayer").html(player);
+				$("div[id=listen].mainplayer").html(player + '<span id="playtoggle" style="margin-top:-21px;margin-left:130px;"></span>');
 
 			}
 
@@ -69,8 +67,11 @@ function initAudio() {
 //		audio = $('.miniplayer audio').get(2); //third one [main]
 		audio = $("div[id=listen].mainplayer audio").get(0); //select main player
 		loadingIndicator = $('.miniplayer #loading');
-		positionIndicator = $('.miniplayer #handle');
-		timeleft = $('.miniplayer #timeleft');
+//		positionIndicator = $('.miniplayer #handle');
+		positionIndicator = $('.miniplayer #handle[title=active]');
+
+//		timeleft = $('.miniplayer #timeleft');
+		timeleft = $('.miniplayer #timeleft[title=active]');
 		
 		if ((audio.buffered != undefined) && (audio.buffered.length != 0)) {
 			$(audio).bind('progress', function() {
@@ -93,7 +94,6 @@ function initAudio() {
 			if (!manualSeek) { positionIndicator.css({left: pos + '%'}); }
 			if (!loaded) {
 				loaded = true;
-				
 				$('.miniplayer #gutter').slider({
 						value: 0,
 						step: 0.01,
@@ -113,25 +113,56 @@ function initAudio() {
 			
 		}).bind('play',function(){
 			//$("#playtoggle").addClass('playing');		
-			$("*[id^=playtoggle]").addClass('playing');
+			//$("*[id^=playtoggle]").addClass('playing');
 		}).bind('pause ended', function() {
 			//$("#playtoggle").removeClass('playing');		
 			$("*[id^=playtoggle]").removeClass('playing');		
+		}).bind('ended', function() {			
+
+			ended($(this));
+		}).bind('seeked', function() {			
+
+			seeked($(this));
 		});		
 		
 //		$("#playtoggle").click(function() {
 		$("*[id^=playtoggle]").click(function() {
-				
+			if ($(this).parents("div").eq(1).attr('id') != "player") //if not main player
+			{
+				$('.miniplayer #handle[title=active]').removeAttr("title");
+				$('.miniplayer #timeleft[title=active]').removeAttr("title");
+			}
+
+			$(this).addClass('playing');
+			$("div[id=listen].mainplayer #playtoggle").addClass('playing');
+			$(this).parents("div").eq(2).find('#handle').attr("title","active");
+			$(this).parents("div").eq(2).find('#timeleft').attr("title","active");
+			$("#player").find('#handle').attr("title","active");
+			$("#player").find('#timeleft').attr("title","active");
+			positionIndicator = $('.miniplayer #handle[title=active]');
+			timeleft = $('.miniplayer #timeleft[title=active]');
 			if (audio.paused) {
-				if(audio.src == "")
-				{
 					var source=$(this).parents("div").eq(2).attr("title");
-//					audio.src= 'http://127.0.0.1/' + source + '.wav';
-					audio.src= 'uploads/0/' + source + '.wav';
+				if(audio.src == "" || audio.src.indexOf('uploads/0/' + source + '.wav')==-1)
+				{
+					if ($(this).parents("div").eq(2).attr('id') == "miniplayer") //not the main player
+					{
+						if (audio.src != "")
+						{
+							next(audio.src,source);
+						}
+//						audio.src= 'http://127.0.0.1/' + source + '.wav';
+						audio.src= 'uploads/0/' + source + '.wav';
+						$('.miniplayer #handle').css({left: 0 + '%'});
+					}
 				}
 				audio.play();
+				played($(this));
 			} 
-			else { audio.pause(); }			
+			else {
+				audio.pause();
+				paused($(this)); 
+			}			
 		});
 
 	}

@@ -5,21 +5,41 @@
 }
 
 #playtoggle {
-	position: absolute;
-	top: 9px;
-	right: 10px;
-	width: 30px;
-	height: 30px;
-	background: url(../img/player.png) no-repeat -30px 0;
+	background-image: url(../img/play.png);
+	background-repeat:no-repeat;
+	background-position:0 0;
+	height:30px;
+	padding:30px;
+	display:inline-block;
+	margin-bottom:5px;
+	margin-left:-15px;
+	width:30px;
+	right:0px;
+	top;0px;
+	position:relative;
 	cursor: pointer;
 }
+#prev {
+	background-image: url('../img/backward.png');
+	background-repeat:no-repeat;
+	display:inline-block;
+}
 
+#next {
+	background-image: url('../img/forward.png');
+	background-repeat:no-repeat;
+	display:inline-block;
+	margin-left:-10px;
+}
 #playtoggle.playing {
-	background-position: 0 0;
+	background-image: url(../img/pause.png);
+	//padding:38px;
+	margin-bottom: -6px;
+	margin-top: 11px;
 }
 
 #playtoggle:active {
-	top: 10px;
+	top: 2px;
 }
 
 #timeleft {
