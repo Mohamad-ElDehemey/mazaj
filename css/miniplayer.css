@@ -4,6 +4,22 @@
 	margin-top: 40px;
 }
 
+.tliked {
+	background-image: url('../img/liked.png');
+	background-repeat:no-repeat ;
+	display: inline-block;
+	margin-left: 10px;
+	padding: 10px;
+}
+
+.tlike {
+	background-image: url('../img/like.png');
+	background-repeat:no-repeat ;
+	display: inline-block;
+	margin-left: 10px;
+	padding: 10px;
+}
+
 #playtoggle {
 	background-image: url(../img/play.png);
 	background-repeat:no-repeat;

@@ -26,11 +26,11 @@ function initAudio() {
                         </div>\
                         <div id="like_repost_controls" style="float:right;display:inline-block;width:130px;margin-top:-30px;margin-right:-55px">\
                         <div id = "repost" onclick="repost( $(this) )" style="background-image: url(' + "'" + 'img/repost.png' + "'" + ');background-repeat:no-repeat;display:inline-block;margin-left:-10px;padding:10px;"></div>\
-                        <div id = "like" onclick="like( $(this) )" style="background-image: url(' + "'" + 'img/like.png' + "'" + ');background-repeat:no-repeat;display:inline-block;margin-left:10px;padding:10px;"></div>\
+                        <div id = "like" onclick="like( $(this) )" class = "tlike" style="padding:10px;"></div>\
                         </div>\
                         <div id="like_repost_results" style="float:right;display:inline-block;width:130px;margin-top:-30px;margin-right:-55px;padding:0px">\
-                        <div id = "repost" style="margin-left:-20px;display:inline-block;width:10%;padding-top:0px;color:#ED8685">1111</div>\
-                        <div id = "like" style="margin-left:-20px;display:inline-block;width:10%;padding-top:0px;color:#ED8685">1111</div>\
+                        <div id = "reposts" style="margin-left:-20px;display:inline-block;width:10%;padding-top:0px;color:#ED8685">1111</div>\
+                        <div id = "likes" style="margin-left:-20px;display:inline-block;width:10%;padding-top:0px;color:#ED8685">1111</div>\
                         </div>\
                         <div id="TrackName" style="float:left;margin-left:-220px;margin-top:-30px;display:block">\
                         <span id="TrackName-1" style="font-size:18px;color:#FFE5E5">Love Story</span>\

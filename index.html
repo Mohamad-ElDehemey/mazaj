@@ -16,7 +16,19 @@
 	<script>
 		function like(thisObj) {
 			var trackid = thisObj.parents("div").eq(2).attr("title");
-			alert("like");
+			if (thisObj.parents("div").eq(2).find("#like").hasClass("tliked"))
+			{
+				thisObj.parents("div").eq(2).find("#like").removeClass("tliked");
+				thisObj.parents("div").eq(2).find("#like").addClass("tlike");
+				alert("unlike");
+			}
+			else if (thisObj.parents("div").eq(2).find("#like").hasClass("tlike"))
+			{
+				thisObj.parents("div").eq(2).find("#like").removeClass("tlike");
+				thisObj.parents("div").eq(2).find("#like").addClass("tliked");
+				alert("like");
+			}
+			
 			<!-- <?php sql update table where .. = trackid?> -->
 		};
 		function repost(thisObj) {
@@ -50,14 +62,52 @@
 			<!-- <?php sql update table where .. = trackid?> -->
 		};
 		function nexttrack(thisObj) {
-			var trackid = thisObj.parents("div").eq(2).next(".miniplayer").attr('title');
-			alert(thisObj.next("#miniplayer").attr('title'));
-			alert(trackid);
+			var trackid = thisObj.parents("div").eq(2).attr('title');
+			var current_index = -1;
+			$.each($("*[id^=miniplayer]"), function( index, value ) {
+				if (value.title == trackid)
+				{
+					current_index = parseInt(index) + 1;	
+				}
+			});
+			if(current_index > -1)
+			{
+				if ($("*[id^=miniplayer]").length > current_index)
+				{
+					$("*[id^=miniplayer]").eq(parseInt(current_index)).find("#playtoggle").click();
+				}
+				if ($("*[id^=miniplayer]").length == current_index)
+				{
+					$("*[id^=miniplayer]").eq(0).find("#playtoggle").click();
+				}
+
+			}
 			<!-- <?php sql update table where .. = trackid?> -->
 		};
 
 
-		function prev(thisObj,val) {
+		function prevtrack(thisObj) {
+			var trackid = thisObj.parents("div").eq(2).attr('title');
+			var current_index = -1;
+			$.each($("*[id^=miniplayer]"), function( index, value ) {
+				if (value.title == trackid)
+				{
+					current_index = parseInt(index) + 1;	
+				}
+			});
+			if(current_index > -1)
+			{
+				if (current_index < $("*[id^=miniplayer]").length)
+				{
+					$("*[id^=miniplayer]").eq(parseInt(current_index)-2).find("#playtoggle").click();
+				}
+				if (current_index == 0)
+				{
+					$("*[id^=miniplayer]").eq($("*[id^=miniplayer]").length -1).find("#playtoggle").click();
+				}
+
+			}
+
 			<!-- <?php sql update table wher .. = trackid?> -->
 		};
 
