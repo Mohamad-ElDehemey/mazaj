@@ -91,7 +91,7 @@ $(document).on("click", "#playlistload", "", function(){
             $(".dropdown-playlist").html(msg + xhr.status + " " + xhr.statusText + chromeerror);
         }
     });    
-
+    $(this).parent().toggleClass('open');
     $('.dropdown-playlist').css('max-height', ($(window).height() - $('.dropdown-playlist').offset().top) + 'px');
     $('.dropdown-playlist').css('height', ($(window).height() - $('.dropdown-playlist').offset().top) + 'px');
 });

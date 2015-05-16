@@ -10,7 +10,9 @@
         <script src="jquery-2.1.1.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/loader.js"></script>
-        <script src="js/jquery.ui.min.js"></script>		
+
+        <script src="js/jquery.ui.min.js"></script>
+        <script src="js/menu_event_handler.js"></script>	
         <link rel="stylesheet" href="css/Index-style.css">
 
 	<script>
@@ -136,15 +138,9 @@
 
 
                 <li class="dropdown">
-                    <a id = "playlistload" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> Playlists <span class="caret"></span></a>
-                    <ul class="dropdown-menu dropdown-playlist" role="menu" style="width:407px;">
-                        <li id="profile"><a href="#">Profile</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
+                    <a id = "playlistload" href="#" class="dropdown-toggle" role="button" aria-expanded="false"> Playlists <span class="caret"></span></a>
+                    <ul class="dropdown-menu scroll-menu dropdown-playlist" role="menu" style="width:407px;">
+
                     </ul>
                 </li>     
 
