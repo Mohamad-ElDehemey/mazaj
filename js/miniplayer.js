@@ -52,7 +52,7 @@ function initAudio() {
 //			$("#listen").html(player);
 			$("div[id=miniplayer]").html(playerbox);
 			$("<br>").insertAfter($("div[id=miniplayer]"));
-			$("div[id=miniplayer]").attr("style", "width:80%;height:175px;background-color:#D54542;border-top-left-radius:15px;border-top-right-radius:15px;border-bottom-left-radius:15px;border-bottom-right-radius:15px;padding:0px")
+			$("div[id=miniplayer]").attr("style", "width:544px;height:175px;background-color:#D54542;border-top-left-radius:15px;border-top-right-radius:15px;border-bottom-left-radius:15px;border-bottom-right-radius:15px;padding:0px")
 			$("div[id=listen]:not(.mainplayer)").html(player);
 //			$("div[id=listen].mainplayer").html(player);
 			if($("div[id=listen].mainplayer").html() == "")
