@@ -184,10 +184,7 @@ function play(name,item){
 		* send request if current time > 1/3 duration
 		*/
 
-		if(){
-
-			
-		}
+		
 
 	});
 
