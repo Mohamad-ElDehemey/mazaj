@@ -278,30 +278,7 @@
         <div class="container-fluid">
           <div class="row">
 
-            <div class="col-lg-8">
-
-            <ul id="#feed-tabs" class="nav nav-tabs" role="tablist">
-              <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Stream</a></li>
-              <li role="presentation" class=""><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Explore</a></li>
-
-            </ul>
-
-            <div id="myTabContent" class="tab-content">
-
-                  <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
-                    <h1 class='tab-head'>
-                     Hear the latest posts from the people you're following
-                    </h1>
-
-                    <div class="tab-content">
-                      
-                    </div>
-                  </div>
-                  <div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab">
-                    <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
-                  </div>
-                  
-            </div>
+            @yield('main')
 
 
             </div>
@@ -318,6 +295,7 @@
     <script>BASE = '{{URL::to('/')}}'</script>
     {!!Html::script('js/main_player.js')!!}
     {!!HTML::script('js/guest.js')!!}
+    {!!HTML::script('js/music-player.js')!!}
     </body>
    
 </html>
