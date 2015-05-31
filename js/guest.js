@@ -221,6 +221,31 @@ function main(){
   $(this).tab('show')
 })
 
+
+	// Browse cover pic
+	$('#select-cover').click(function(event){
+
+		event.preventDefault();
+		$('#coverimg').click();
+
+	});
+
+	$('#coverimg').change(function(){
+
+		var img = $(this).val();
+		//ajax upload img
+		//view img
+
+	});
+
+	//Browse track file
+	$('#track-browse').click(function(event){
+
+		event.preventDefault();
+		$('#trackfile').click();
+
+	});
+
 	
 }
 

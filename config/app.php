@@ -147,6 +147,8 @@ return [
 		'App\Providers\RouteServiceProvider',
 		'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
 
+		'Mazaj\Providers\NavServiceProvider',
+
 	],
 
 	/*
@@ -197,6 +199,8 @@ return [
 
 		'Form'  	=>'Illuminate\Html\FormFacade',
 		'Html'  	=>'Illuminate\Html\HtmlFacade',
+
+		'Nav' 		=>'Mazaj\Facades\Nav',
 	],
 
 ];

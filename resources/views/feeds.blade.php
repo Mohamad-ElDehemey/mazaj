@@ -202,9 +202,9 @@
                 <button type="submit" class="btn btn-default nav-search"><span class="glyphicon glyphicon-search"></span> </button>
               </form>
               <ul class="nav navbar-nav navbar-right navbar-music ">
-                <li><a href="upload.html">Upload</a></li>
+                <li><a href="{!!URL::to('upload')!!}">Upload</a></li>
                   <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img src="{{$avatar}}" height="19px" width="19px"> {{Auth::user()->username}}<span class="caret"></span></a>
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img src="{{Nav::avatar(Auth::user()->id)}}" height="19px" width="19px"> {{Auth::user()->username}}<span class="caret"></span></a>
                       <ul class="dropdown-menu" role="menu">
                         <li><a href="Profile.html">Profile</a></li>
                         <li><a href="#">Another action</a></li>

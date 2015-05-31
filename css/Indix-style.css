@@ -551,3 +551,58 @@ body{
 
   color: #FFD700;
 }
+
+.no-float{
+
+  float:none;
+}
+
+.center-block{
+
+  margin:auto;
+}
+
+.cover-img{
+
+  border:1px solid #cccccc;
+  background: #ebebeb;
+  height: 172px;
+  position: relative;
+  
+}
+
+.img-bg{
+
+  color: #f7f7f7;
+  display: block !important;
+  text-align: center;
+  font-size: 5em;
+  margin-top: 30px;
+
+}
+
+.no-rds{
+
+  border-radius: 0;
+}
+
+#select-cover{
+
+  position: absolute;
+  bottom: 20px;
+  left:26px;
+  right:20px;
+  width:80% !important;
+}
+
+#cover-img{
+  display: none;
+}
+
+#cover-img>img{
+  
+  height: 172px;
+  width: 100%;
+  
+
+}
