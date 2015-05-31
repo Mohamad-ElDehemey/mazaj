@@ -121,9 +121,29 @@ $('.prev').click(function(event){
 *-------------------------------------------
 */
 
+$('#add-to-pl').modal('show');
+
 $('.add-to-list').click(function(event){
 
-	$('#add-to-pl').modal('show');
+	
+});
+
+/**
+*----------------------------------------
+* New Playlist
+*----------------------------------------
+*/
+
+$('#cr-new-pl').click(function(event){
+
+	event.preventDefault();
+	var this_btn = $(this);
+	var loading = 'loading' + " <i class='fa fa-spinner fa-spin'></i>"
+	var token = $('input[name="_token"]').val();
+	var name =$('#list-name').val();
+
+	
+
 });
 
 

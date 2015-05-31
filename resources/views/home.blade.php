@@ -13,11 +13,52 @@
         <h4 class="modal-title">Modal title</h4>
       </div>
       <div class="modal-body">
-        <p>One fine body&hellip;</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        
+        <div class="new-pl">
+          {!!Form::open([
+              'class' =>'form-inline'
+          ])!!}
+            <div class="form-group">
+              {!!Form::input('text','name','',[
+
+              'class'       =>'form-control',
+              'placeholder' =>'Playlist name',
+              'id'          => 'list-name'    
+              ])!!}
+
+                <button type="submit" id='cr-new-pl'  class='btn btn-warning' name='submit'>New playlist</button>
+            </div>
+        </div>
+
+        <div class="old-pl">
+          <div class="list container-fluid" listid='2'>
+            <div class="row">
+              <div class="col-lg-8">
+
+                <a href='#' class='list-name'>First pl</a>
+            
+              </div>
+              <div class="col-lg-4">
+                <button type="button" class="btn btn-success btn-sm add-to-list pull-right"><span class="glyphicon glyphicon-ok"></span></button>
+              </div>
+            </div>
+          </div>
+
+
+                    <div class="list container-fluid" listid='1'>
+            <div class="row">
+              <div class="col-lg-8">
+
+                <strong class='btn-link list-name '>First pl</strong>
+            
+              </div>
+              <div class="col-lg-4">
+                <button type="button" class="btn btn-danger btn-sm add-to-list pull-right"><span class="glyphicon glyphicon-remove"></span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
