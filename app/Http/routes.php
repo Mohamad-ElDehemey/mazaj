@@ -16,3 +16,6 @@ Route::controller('user', 'UserController');
 Route::controller('message','MessageController');
 Route::controller('upload','UploadController');
 Route::controller('rate','RateController');
+Route::controller('like','LikeController');
+Route::controller('post','PostController');
+Route::controller('list','PlaylistController');

@@ -80,8 +80,8 @@
                       						<div class="row">
                       							<div class="col-lg-6">
                       								<p>
-                      								<strong>track name</strong>
-                      								<a class="track-owner" href='#'>user name</a>
+                      								<strong>{{$post->track->title}}</strong>
+                      								<a class="track-owner" href='{!!URL::to("/")!!}/user/{!!$post->user->id!!}'>{{$post->user->username}}</a>
                       								</p>
                       								
                       							</div>
