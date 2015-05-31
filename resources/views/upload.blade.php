@@ -312,15 +312,6 @@
 									])!!}
 								</div>
 
-								<div class="form-group">
-									{!!Form::textarea('desc',Input::old('desc'),[
-										
-										'placeholder'  =>'Description',
-										'class'		   =>'form-control no-rds',
-										'rows'		   =>'3'
-									])!!}
-								</div>
-
 								<!--files feildS -->
 								    <input class='hide' type="file" name="cover" accept="image/*" id="coverimg">
 								    <input class='hide' type="file" name="track"  accept="audio/*" id="trackfile">

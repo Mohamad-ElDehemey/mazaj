@@ -10,7 +10,8 @@ use Mazaj\Nav;
 use Input;
 use Validator;
 use Redirect;
-use App\Tracks;
+use App\Track;
+use App\Post;
 
 class UploadController extends Controller {
 
@@ -53,7 +54,7 @@ class UploadController extends Controller {
 
 			$random_name = rand(11111,99999);
 
-			$check_name = Tracks::where('name','=',$random_name)->first();
+			$check_name = Track::where('name','=',$random_name)->first();
 			while($check_name){
 
 				$random_name = rand(11111,99999);
@@ -70,7 +71,7 @@ class UploadController extends Controller {
 					$dest = 'storage/pics';
 					$ext  =Input::file('cover')->getClientOriginalExtension();
 					Input::file('cover')->move($dest,$random_name.'.'.$ext);
-					$cover = $random_name;
+					$cover = $random_name.'.'.$ext;
 				}
 				
 
@@ -80,7 +81,7 @@ class UploadController extends Controller {
 				$user_id = Auth::user()->id;
 
 				// update tracks table
-				$track = Tracks::create([
+				$track = Track::create([
 
 						'title'		=>$title,
 						'name' 		=>$name,
@@ -92,7 +93,14 @@ class UploadController extends Controller {
 				//update tags table
 
 				// update posts table
-				
+				$post = Post::create([
+
+						'user_id' 	=>Auth::user()->id,
+						'track_id'	=>$track->id
+
+					]);
+
+
 				return Redirect('/');
 			}
 		}else{

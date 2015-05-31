@@ -5,21 +5,14 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\Post;
 class FeedController extends Controller {
 
 	//
 
 	public function index(){
 
-		$avatar = '';
-		if(Auth::check()){
-
-		$email = Auth::user()->email;
-		$size = 40;
-		$avatar = "http://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?d=" . urlencode( $avatar ) . "&s=" . $size;
-		}
-
-		return View('home')
-					->with('avatar',$avatar);
+		$posts = Post::with('user')->paginate(5);
+		return View('home')->with('posts',$posts);
 	}
 }

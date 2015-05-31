@@ -42,14 +42,14 @@
                     <div class="tab-content">
                       
                       <div class="container-fluid stream">
-					
+					@foreach($posts as $post)
 					<!-- post item start -->
-                      	<div class="row item-row" id='post-xyz' status='off' track='track.mp3' afterPuase='false'>
+                      	<div class="row item-row" id='post-{!!$post->track->id!!}' status='off' track='{!!$post->track->name!!}.mp3' afterPuase='false'>
                       		<div class="container-fluid no-padding">
                       			<div class="row">
                       				<div class="col-lg-4">
 										<div class='player-post-data'>
-											<img class="img-responsive cover" src='http://lorempixel.com/400/400/'/>
+											<img class="img-responsive cover" src='{!!URL::to("/")!!}/storage/pics/{!!$post->track->cover!!}'/>
 										</div>
 							
                       				</div>
@@ -66,11 +66,11 @@
                       							<div class="col-lg-4">
                       								<div class="action-btn">
                       									<p><a type="button" class="btn btn-link share ctrl-btn"><span class="glyphicon glyphicon-retweet"></span></a></p>
-                      									<p class='action-count'>12</p>
+                      									
                       								</div>
                       								<div class="action-btn">
                       									<p><a type="button" class="btn btn-link share ctrl-btn"><span class="fa fa-heart"></span></a></p>
-                      									<p class='action-count'>9</p>
+                      									<p class='action-count'>{!!App\Like::where('track_id','=',$post->track->id)->get()->count()!!}</p>
                       								</div>
                       							</div>
                       						</div>
@@ -108,74 +108,9 @@
                       		</div>
                       	</div>
 					<!-- post item end -->
+          @endforeach
 
-
-          <!-- post item start -->
-                        <div class="row item-row" id='post-abc' status='off' track='mawaly_m-elroomy_Dawy_Ya_Amar.mp3' afterPuase='false'>
-                          <div class="container-fluid no-padding">
-                            <div class="row">
-                              <div class="col-lg-4">
-                    <div class='player-post-data'>
-                      <img class="img-responsive cover" src='http://lorempixel.com/400/400/'/>
-                    </div>
-              
-                              </div>
-                              <div class="col-lg-8 no-padding">
-                                
-                                <div class="player-ctrl container-fluid no-padding">
-                                  <div class="row">
-                                    <div class="col-lg-8">
-                                      <a class="btn btn-link prev ctrl-btn"><span class="glyphicon  glyphicon-backward"></span></a>
-                                      <a class="btn btn-link play ctrl-btn"><span class="glyphicon glyphicon-play"></span></a>
-                                      <a class="btn btn-link next ctrl-btn"><span class="glyphicon glyphicon-forward"></span></a>
-                                      <a class="btn btn-link add-to-list ctrl-btn"><span class="glyphicon glyphicon-list-alt"></span></a>
-                                    </div>
-                                    <div class="col-lg-4">
-                                      <div class="action-btn">
-                                        <p><a type="button" class="btn btn-link share ctrl-btn"><span class="glyphicon glyphicon-retweet"></span></a></p>
-                                        <p class='action-count'>12</p>
-                                      </div>
-                                      <div class="action-btn">
-                                        <p><a type="button" class="btn btn-link share ctrl-btn"><span class="fa fa-heart"></span></a></p>
-                                        <p class='action-count'>9</p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-
-                                <div class="track-name container-fluid">
-                                  <div class="row">
-                                    <div class="col-lg-6">
-                                      <p>
-                                      <strong>track name</strong>
-                                      <a class="track-owner" href='#'>user name</a>
-                                      </p>
-                                      
-                                    </div>
-                                    <div class="col-lg-6 rate">
-                                      <i class="fa fa-star star"></i>
-                                      <i class="fa fa-star star"></i>
-                                      <i class="fa fa-star star"></i>
-                                      <i class="fa fa-star star"></i>
-                                      <i class="fa fa-star star"></i>
-                                    </div>
-                                  </div>
-                                </div> 
-
-                                <div class="track-seeker container-fluid">
-                                  <div class="timer seeker-div">
-                                    <p></p>
-                                  </div>
-                                  <div class="seeker-div seeker">
-                                    <div class="seeker-inner"></div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-          <!-- post item end -->
-
+        
 
                       </div>
 
