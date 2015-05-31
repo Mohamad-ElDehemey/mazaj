@@ -49,7 +49,7 @@ class UploadController extends Controller {
 		if($validation->passes()){
 
 
-			$cover='';
+			$cover='def.png';
 
 
 			$random_name = rand(11111,99999);

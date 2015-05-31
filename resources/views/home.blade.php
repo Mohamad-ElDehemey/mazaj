@@ -4,7 +4,7 @@
 <!-- 
 ========== ADD TO PLAYLIST ==============
 -->
-
+{!!Form::token()!!}
 <div class="modal fade" id='add-to-pl'>
   <div class="modal-dialog">
     <div class="modal-content">
@@ -42,7 +42,28 @@
                     <div class="tab-content">
                       
                       <div class="container-fluid stream">
+
+          @if($posts->count())
 					@foreach($posts as $post)
+
+          <?php 
+
+            $posted = false;
+            $liked  =false;
+
+            if(Auth::check()){
+
+              $like = App\Like::where('track_id','=',$post->track->id)->where('user_id','=',Auth::user()->id)->first();
+              if($like)
+                $like = true;
+
+              $post = App\Post::where('user_id','=',Auth::user()->id)->where('track_id','=',$post->track->id)->first();
+              if($post)
+                $posted = true;
+
+            }
+            
+          ?>
 					<!-- post item start -->
                       	<div class="row item-row" id='{!!$post->track->id!!}' status='off' track='{!!$post->track->name!!}.mp3' afterPuase='false'>
                       		<div class="container-fluid no-padding">
@@ -65,11 +86,15 @@
                       							</div>
                       							<div class="col-lg-4">
                       								<div class="action-btn">
-                      									<p><a type="button" class="btn btn-link share ctrl-btn"><span class="glyphicon glyphicon-retweet"></span></a></p>
+                      									<p>
+                                          <a type="button" class="btn btn-link share ctrl-btn @if($posted) used-btn @endif" action='@if($posted)unshare @else share @endif'>
+                                            <span class="glyphicon glyphicon-retweet"></span>
+                                          </a>
+                                        </p>
                       									
                       								</div>
                       								<div class="action-btn">
-                      									<p><a type="button" class="btn btn-link share ctrl-btn"><span class="fa fa-heart"></span></a></p>
+                      									<p><a type="button" class="btn btn-link share ctrl-btn @if($liked)used-btn @endif" action='@if($liked)unlike @else like @endif'><span class="fa fa-heart"></span></a></p>
                       									<p class='action-count'>{!!App\Like::where('track_id','=',$post->track->id)->get()->count()!!}</p>
                       								</div>
                       							</div>
@@ -109,6 +134,9 @@
                       	</div>
 					<!-- post item end -->
           @endforeach
+          @else
+            <p>Sorry, There are no music to view, Be the first publisher. <a href="{!!URL::to('upload')!!}">Upload</a> your awesom music!</p>
+          @endif
 
         
 

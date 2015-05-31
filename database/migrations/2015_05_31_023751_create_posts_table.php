@@ -21,6 +21,8 @@ class CreatePostsTable extends Migration {
 
             $table->integer('track_id')->unsigned()->index();
             $table->foreign('track_id')->references('id')->on('tracks')->onDelete('cascade');
+
+            $table->integer('status')->default('1');
 			$table->timestamps();
 		});
 	}

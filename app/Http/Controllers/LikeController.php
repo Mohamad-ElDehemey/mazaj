@@ -16,11 +16,11 @@ class LikeController extends Controller {
 	* check if not liked
 	* updates likes table
 	*
-	* @return
+	* @return int total_likes
 	*/
-	public function postLike(){
+	public function postLike(Request $request){
 
-
+		
 	}
 
 
@@ -31,7 +31,7 @@ class LikeController extends Controller {
 	* check if liked
 	* updates likes table
 	*
-	* @return
+	* @return int total_likes
 	*/
 
 	public function postUnlike(){

@@ -128,11 +128,12 @@ $('.add-to-list').click(function(event){
 
 
 
-/*
-*-------------------------------------------------
-* REPOST
-*-------------------------------------------------
-*/
+$('.share').click(function(event){
+
+	var this_btn = $(this);
+	var action = this_btn.attr('action');
+	var token = $('input[name="_token"]').val();
+	var track_id = $(this).closest('.item-row').attr('id');
 
 
 /*
@@ -140,6 +141,146 @@ $('.add-to-list').click(function(event){
 * LIKE
 *--------------------------------------------------
 */
+	
+	if(action ==' like '){
+
+		$.ajax({
+			url: BASE+'/like/like',
+			type: 'POST',
+			data: {
+
+				_token: token,
+				track_id :track_id
+
+			},
+			beforeSend:function(){
+
+				this_btn.children('.fa').removeClass('fa-heart').addClass('fa-spinner fa-spin');
+
+			},
+			success:function(result){
+
+				this_btn.children('.fa').removeClass('fa-spinner fa-spin').addClass('fa-heart');
+				this_btn.addClass('used-btn').attr('action','unlike ');
+				this_btn.closest('.action-btn').find('.action-count').html(result);
+
+
+				
+			}
+		});
+		
+		
+	}
+
+
+/*
+*----------------------------------------------------
+* Unlike
+*----------------------------------------------------
+*/
+	if(action=='unlike '){
+
+		$.ajax({
+			url: BASE+'/like/unlike',
+			type: 'POST',
+			data: {
+
+				_token: token,
+				track_id :track_id
+
+			},
+			beforeSend:function(){
+
+				this_btn.children('.fa').removeClass('fa-heart').addClass('fa-spinner fa-spin');
+
+			},
+			success:function(result){
+
+				this_btn.children('.fa').removeClass('fa-spinner fa-spin').addClass('fa-heart');
+				this_btn.removeClass('used-btn').attr('action',' like ');
+				this_btn.closest('.action-btn').find('.action-count').html(result);
+
+
+				
+			}
+		});
+	}
+
+
+
+/*
+*-------------------------------------------------
+* REPOST
+*-------------------------------------------------
+*/
+
+if(action ==' share '){
+
+	$.ajax({
+			url: BASE+'/post/post',
+			type: 'POST',
+			data: {
+
+				_token: token,
+				track_id :track_id
+
+			},
+			beforeSend:function(){
+
+				this_btn.children('.glyphicon').removeClass('glyphicon glyphicon-retweet').addClass('fa fa-spinner fa-spin');
+
+			},
+			success:function(result){
+
+				this_btn.children('.fa').removeClass('fa fa-spinner fa-spin').addClass('glyphicon glyphicon-retweet');
+				this_btn.addClass('used-btn').attr('action','unshare ');
+				this_btn.closest('.action-btn').find('.action-count').html(result);
+
+
+				
+			}
+		});
+}
+
+/*
+*------------------------------------------------------
+* Unshare
+*--------------------------------------------------
+*/
+
+if(action=='unshare '){
+
+
+	$.ajax({
+			url: BASE+'/post/unpost',
+			type: 'POST',
+			data: {
+
+				_token: token,
+				track_id :track_id
+
+			},
+			beforeSend:function(){
+
+				this_btn.children('.glyphicon').removeClass('glyphicon glyphicon-retweet').addClass('fa fa-spinner fa-spin');
+
+			},
+			success:function(result){
+
+				this_btn.children('.fa').removeClass('fa fa-spinner fa-spin').addClass('glyphicon glyphicon-retweet');
+				this_btn.removeClass('used-btn').attr('action',' share ');
+				this_btn.closest('.action-btn').find('.action-count').html(result);
+
+
+				
+			}
+		});
+
+}
+
+
+	
+});
 
 } // main
 
