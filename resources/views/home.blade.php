@@ -44,7 +44,7 @@
                       <div class="container-fluid stream">
 					@foreach($posts as $post)
 					<!-- post item start -->
-                      	<div class="row item-row" id='post-{!!$post->track->id!!}' status='off' track='{!!$post->track->name!!}.mp3' afterPuase='false'>
+                      	<div class="row item-row" id='{!!$post->track->id!!}' status='off' track='{!!$post->track->name!!}.mp3' afterPuase='false'>
                       		<div class="container-fluid no-padding">
                       			<div class="row">
                       				<div class="col-lg-4">
