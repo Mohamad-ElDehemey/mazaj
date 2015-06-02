@@ -19,3 +19,8 @@ Route::controller('rate','RateController');
 Route::controller('like','LikeController');
 Route::controller('post','PostController');
 Route::controller('list','PlaylistController');
+Route::controller('rate','RateController');
+Route::controller('follow','FollowController');
+Route::get('s/{term}','SearchController@index');
+Route::controller('tag','TagController');
+Route::controller('playlist','PlaylistController');

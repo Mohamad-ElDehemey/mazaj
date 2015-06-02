@@ -1,6 +1,6 @@
-jQuery(document).ready(main);
+
 var tracks = new Object();
-function main(){
+
 
 	/*
 	*----------------------------------------
@@ -92,60 +92,15 @@ $('.prev').click(function(event){
 * EXPLICIT RATE
 *-----------------------------------------
 */	
-	
-	$('.star').hover(function(){
-		$(this).prevAll().andSelf().addClass('star-active');
-		$(this).nextAll().removeClass('star-active');
-	},function(){
-
-		/* SHOULD BE EDITED TO SET THE ACTUAL RATE BEFORE MOUSE HOVER
-		*
-		* THIS CAN BE GET THROUGH CHECKING DATABASE 
-		* OR THROUGH CHECKING THE SESSION
-		*
-		*/
-
-
-		$(this).prevAll().andSelf().removeClass('star-active');
-	});
 
 	$('.star').click(function(){
 		var item = $(this).closest('.item-row').attr('id');
 		var rate = $(this).attr('data');
 		set_rate(item,rate);
+		$(this).prevAll().andSelf().addClass('star-active');
+		$(this).nextAll().removeClass('star-active');
+		
 	});
-
-/*
-*-------------------------------------------
-* ADD TO PLAYLIST
-*-------------------------------------------
-*/
-
-$('#add-to-pl').modal('show');
-
-$('.add-to-list').click(function(event){
-
-	
-});
-
-/**
-*----------------------------------------
-* New Playlist
-*----------------------------------------
-*/
-
-$('#cr-new-pl').click(function(event){
-
-	event.preventDefault();
-	var this_btn = $(this);
-	var loading = 'loading' + " <i class='fa fa-spinner fa-spin'></i>"
-	var token = $('input[name="_token"]').val();
-	var name =$('#list-name').val();
-
-	
-
-});
-
 
 
 $('.share').click(function(event){
@@ -302,7 +257,6 @@ if(action=='unshare '){
 	
 });
 
-} // main
 
 
 function play(name,item){
@@ -347,6 +301,8 @@ function play(name,item){
 
 		
 
+		
+
 	});
 
 	tracks[name].addEventListener('ended',function(){
@@ -354,6 +310,7 @@ function play(name,item){
 		item.find('.glyphicon-pause').removeClass('glyphicon-pause').addClass('glyphicon-play');
 		item.attr('status','off');
 		item.find('.next').click();
+		
 	});
 }
 
@@ -402,10 +359,99 @@ function getTimer(time){
 }
 
 function set_rate(item,rate){
+	var token = $('input[name="_token"]').val();
+	$.ajax({
+		url: BASE+'/rate/explicit',
+		type: 'POST',
+		data: {
 
-	console.log(item);
-	console.log(rate);
+			_token:token,
+			 item :item,
+			 rate :rate
+		}
+	})
+	
 }
+
+
+/**
+*----------------------------------------
+* New Playlist
+*----------------------------------------
+*/
+
+$('#cr-new-pl').click(function(event){
+
+	event.preventDefault();
+	var this_btn = $(this);
+	var loading = 'loading' + " <i class='fa fa-spinner fa-spin'></i>"
+	var token = $('input[name="_token"]').val();
+	var name =$('#list-name').val();
+
+	//ajax request to create new playlist
+	if(name.length)
+	$.ajax({
+		url: BASE+'/playlist/create',
+		type: 'POST',
+		data: {
+
+			_token:token,
+			name:name
+		},
+		beforeSend:function(){
+
+			this_btn.html(loading);
+		},
+		success:function(result){
+
+			$('.old-pl').append(result);
+			this_btn.html('New Playlist');
+		}
+	})
+	
+	
+
+});
+
+
+$('.add-to-list').click(function(event){
+
+	$('#add-to-pl').modal('show');
+
+	/**
+*--------------------------------------------
+* View user play lists
+*--------------------------------------------
+*/
+
+var track_id = $(this).closest('.item-row').attr('id');
+$.ajax({
+	url: BASE+'/playlist/all',
+	type: 'default GET (Other values: POST)',
+	dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
+	data: {param1: 'value1'},
+})
+.done(function() {
+	console.log("success");
+})
+.fail(function() {
+	console.log("error");
+})
+.always(function() {
+	console.log("complete");
+});
+
+
+
+/*
+*-------------------------------------------
+* ADD TO PLAYLIST
+*-------------------------------------------
+*/
+
+	
+});
+
 
 
 

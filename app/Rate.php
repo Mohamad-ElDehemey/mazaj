@@ -6,4 +6,6 @@ class Rate extends Model {
 
 	//
 
+	protected $fillable = ['rate','isexplicit','user_id','track_id','played','shared','inlists'];
+
 }

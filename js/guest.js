@@ -247,7 +247,6 @@ function main(){
 	});
 
 	
-}
 
 function error_message(item,id){
 
@@ -260,4 +259,55 @@ function error_message(item,id){
 
 		$(String(id)).slideUp('fast');
 	}
+}
+
+
+/*
+	*---------------------------------------
+	* FOLLOW
+	*---------------------------------------
+	*/
+
+	$('.btn-follow').click(function(event){
+
+		var this_btn = $(this);
+		var followed_id = this_btn.attr('data');
+		var action = $(this).attr('action');
+
+		var url = BASE+'/follow/follow';
+		if(action != ' follow '){
+
+			url = BASE+'/follow/unfollow';
+			this_btn.html('Follow');
+			this_btn.attr('action',' follow ');
+
+			num = parseInt($('count').html());
+			num--;
+			$('count').html(num);
+
+
+
+		}else{
+
+			this_btn.html('Unfollow');
+			this_btn.attr('action','unfollow');
+
+			num = parseInt($('count').html());
+			num++;
+			$('count').html(num);
+
+		}
+		$.ajax({
+			url: url,
+			type: 'POST',
+			data: {
+
+			 '_token': $('input[name=_token]').val(),
+			 followed_id:followed_id,
+			},
+		})
+		
+		
+		
+	});
 }

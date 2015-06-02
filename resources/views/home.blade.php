@@ -68,22 +68,25 @@
 <div class="col-lg-8">
 
             <ul id="#feed-tabs" class="nav nav-tabs" role="tablist">
+              
               <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Stream</a></li>
+              @if(Auth::check())
               <li role="presentation" class=""><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Explore</a></li>
-
+              @endif
             </ul>
 
             <div id="myTabContent" class="tab-content">
 
                   <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
+                  @if(Auth::check())
                     <h1 class='tab-head'>
                      Hear the latest posts from the people you're following
                     </h1>
-
+                  @endif
                     <div class="tab-content">
                       
                       <div class="container-fluid stream">
-
+          @if(Auth::check())
           @if($posts->count())
 					@foreach($posts as $post)
 
@@ -98,8 +101,8 @@
               if($like)
                 $like = true;
 
-              $post = App\Post::where('user_id','=',Auth::user()->id)->where('track_id','=',$post->track->id)->first();
-              if($post)
+              $posted = App\Post::where('user_id','=',Auth::user()->id)->where('track_id','=',$post->track->id)->first();
+              if($posted)
                 $posted = true;
 
             }
@@ -123,7 +126,25 @@
                       								<a class="btn btn-link prev ctrl-btn"><span class="glyphicon  glyphicon-backward"></span></a>
                       								<a class="btn btn-link play ctrl-btn"><span class="glyphicon glyphicon-play"></span></a>
                       								<a class="btn btn-link next ctrl-btn"><span class="glyphicon glyphicon-forward"></span></a>
-                      								<a class="btn btn-link add-to-list ctrl-btn"><span class="glyphicon glyphicon-list-alt"></span></a>
+                                      <a class="btn btn-link add-to-list ctrl-btn"><span class="glyphicon glyphicon-list-alt"></span></a>
+
+                            
+                              
+                            
+                            <?php
+                              $tags = App\Track::find($post->track->id)->tag('track_id','=',$post->track->id)->get();
+                             ?>
+
+                             @if($tags)
+                         <div class='tag-list'>
+                             @foreach($tags as $tag)
+                                      <a class="btn btn-link add-to-list ctrl-btn tag" href='{!!URL::to('/')!!}/tag/id/{!!$tag->id!!}'>
+                                        #{!!$tag->name!!}
+                                      </span></a>
+                              @endforeach
+                        </div>
+                              @endif      
+                          
                       							</div>
                       							<div class="col-lg-4">
                       								<div class="action-btn">
@@ -147,16 +168,38 @@
                       							<div class="col-lg-6">
                       								<p>
                       								<strong>{{$post->track->title}}</strong>
-                      								<a class="track-owner" href='{!!URL::to("/")!!}/user/{!!$post->user->id!!}'>{{$post->user->username}}</a>
+                      								<a class="track-owner" href='{!!URL::to("/")!!}/user/profile/{!!$post->user->id!!}'>{{$post->user->username}}</a>
                       								</p>
                       								
                       							</div>
                                     <div class="col-lg-6 rate">
+                              <?php 
+                                $rate = '';
+                                if(Auth::check()):
+                                $rate = App\Rate::where('user_id','=',Auth::user()->id)
+                                                ->where('track_id','=',$post->track->id)->first();
+                                if($rate)
+                                $rate = $rate->rate;
+                                endif;
+                              ?>
+
+                              @if($rate !='')
+                                @for($i=1;$i<=$rate;$i++)
+                                  <i class="fa fa-star star star-active" data='{!!$i!!}'></i>
+                                @endfor
+                                @for($i;$i<=5;$i++)
+                                  <i class="fa fa-star star" data='{!!$i!!}'></i>
+                                @endfor
+                              @else 
                                       <i class="fa fa-star star" data='1'></i>
                                       <i class="fa fa-star star" data='2'></i>
                                       <i class="fa fa-star star" data='3'></i>
                                       <i class="fa fa-star star" data='4'></i>
                                       <i class="fa fa-star star" data='5'></i>
+                              @endif
+                                      
+
+
                                     </div>
                       						</div>
                       					</div> 
@@ -178,6 +221,9 @@
           @else
             <p>Sorry, There are no music to view, Be the first publisher. <a href="{!!URL::to('upload')!!}">Upload</a> your awesom music!</p>
           @endif
+          @else
+          VISITOR
+          @endif
 
         
 
@@ -191,4 +237,61 @@
                   </div>
                   
             </div>
+@stop
+
+@section('sidebar')
+ @if(Auth::check())
+                <div class="container-fluid">
+                  <div class="row">
+                      
+                      <div class="widget col-lg-12">
+                        <h2 class="widget-title">
+                          <i class="fa fa-users"></i>They have your same taste
+                        </h2>
+
+                        <div class="widget-content container-fluid">
+<!-- friend row-->
+                          <div class="row no-padding fr-row">
+
+                            <div class="col-lg-2 no-padding">
+                              <img class="img-responsive" src='http://lorempixel.com/400/400'/>
+                            </div>
+
+                            <div class="col-lg-5">
+                              <div class='fr-name'><a href="#" >Nadia Hussein</a></div>
+                              <div class='fr-count'><i class="fa fa-user-plus"></i>17152</div>
+                            </div>
+
+                            <div class="col-lg-5">
+                              <button type="button" class="btn btn-default btn-sm btn-block btn-follow" data='1' action=' follow '>Follow</button>
+                            </div> 
+                          </div>
+<!-- fr end -->
+
+<!-- friend row-->
+                          <div class="row no-padding fr-row">
+
+                            <div class="col-lg-2 no-padding">
+                              <img class="img-responsive" src='http://lorempixel.com/400/400'/>
+                            </div>
+
+                            <div class="col-lg-5">
+                              <div class='fr-name'><a href="#" >Samy Hussein</a></div>
+                              <div class='fr-count'><i class="fa fa-user-plus"></i>17152</div>
+                            </div>
+
+                            <div class="col-lg-5">
+                              <button type="button" class="btn btn-default btn-sm btn-block btn-follow" data='1' action=' follow '>Follow</button>
+                            </div> 
+                          </div>
+<!-- fr end -->
+                        </div>
+                      </div>
+                      
+
+
+
+                  </div>
+                </div>
+              @endif
 @stop

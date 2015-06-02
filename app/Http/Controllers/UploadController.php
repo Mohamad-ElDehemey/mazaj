@@ -12,6 +12,7 @@ use Validator;
 use Redirect;
 use App\Track;
 use App\Post;
+use App\Tag;
 
 class UploadController extends Controller {
 
@@ -91,7 +92,25 @@ class UploadController extends Controller {
 					]);
 
 				//update tags table
+				$tags = $request->get('tags');
+				if($tags){
 
+					$tags = explode(',',$tags);
+					foreach ($tags as $tag) {
+						
+						$old_tag = Tag::where('name','=',$tag)->first();
+						if(!$old_tag){
+
+							$old_tag = Tag::create([
+
+									'name'	=>$tag
+
+								]);
+						}
+						$track->tag()->save($old_tag);
+
+					}
+				}
 				// update posts table
 				$post = Post::create([
 

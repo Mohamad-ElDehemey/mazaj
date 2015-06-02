@@ -4,7 +4,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-
+use App\Rate;
+use Auth;
 class RateController extends Controller {
 
 	//
@@ -36,10 +37,36 @@ class RateController extends Controller {
 	* @return
 	*/
 
-	public function postExplicit(){
+	public function postExplicit(Request $request){
 
+		extract($request->all());
+		$user_id 	= Auth::user()->id;
+		$track_id 	= $item;
+		$value		=$rate;
 
+		$rate = Rate::where('user_id','=',$user_id)->where('track_id','=',$track_id)->first();
+		if($rate){
+
+			$rate->rate = $value;
+			$rate->isexplicit = true;
+			$rate->save();
+
+		}else{
+
+			$rate =  Rate::create([
+
+			'rate'			=> $value,
+			'isexplicit'	=>true,
+			'user_id' 		=>Auth::user()->id,
+			'track_id'		=>$track_id
+
+			]);
+		}
+
+		
 	} 
+
+	
 
 
 

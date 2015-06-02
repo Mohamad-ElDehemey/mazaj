@@ -6,8 +6,28 @@ use App\User;
 use Illuminate\Http\Request;
 use Auth;
 use Hash;
+use App\Post;
+use App\Follow;
+
 
 class UserController extends Controller {
+
+	public function getProfile($id){
+
+		$user = User::find($id);
+		if(!$user)
+			return redirect('/');
+
+
+		$posts = Post::with('user')->where('user_id','=',$id)->orderBy('created_at','DESC')->paginate(7);
+		$follows = Follow::where('follower_id','=',Auth::user()->id)->first();
+		
+
+		return view('profile')
+		->with('posts',$posts)
+		->with('user',$user)
+		->with('follows',$follows);
+	}
 
 	// REGISTERATION
 	public function postNew(Request $request){

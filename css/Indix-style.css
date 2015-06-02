@@ -550,6 +550,7 @@ body{
 .star-active{
 
   color: #FFD700;
+ 
 }
 
 .no-float{
@@ -632,4 +633,111 @@ body{
   font-size: 14px;
   font-weight: bold;
   cursor: pointer;
+}
+
+.fr-row{
+
+  margin-bottom: 15px;
+}
+
+#sidebar{
+
+  border-left:1px solid #e9e9e9;
+}
+
+.widget-title{
+
+  color:#b7b7b7;
+  font-size:21px;
+  padding-bottom: 20px;
+  border-bottom:1px solid #ebebeb;
+  margin-bottom: 20px;
+}
+
+.widget-title>.fa{
+  margin-right:10px;
+}
+
+.widget{
+
+  color: #b7b7b7;
+}
+
+.widget a:link,
+.widget a:visited{
+
+  color: #555;
+}
+
+.fr-name{
+  margin-bottom:18px;
+}
+
+.side-ctrl-btn{
+
+  cursor: pointer
+}
+
+.user-data{
+
+  margin-top:20px;
+  margin-bottom: 20px;
+  border-top: 1px solid #b7b7b7;
+  border-bottom: 1px solid #b7b7b7;
+  padding-top:10px;
+  padding-bottom:10px;
+  text-align: center;
+  color: #333;
+}
+
+#navbar-brand{
+  color: #fff;
+  margin-left: 92px;
+  padding-top: 15px;
+}
+
+#profile{
+
+  padding-top: 40px;
+}
+
+.list-playlist{
+
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.tracks-num{
+
+  color: #FFF;
+  background: #333;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  padding:5px;
+  border-radius: 50%;
+  position: absolute;
+  font-size: 10px;
+  bottom: 20px;
+  left:40px;
+}
+
+
+.tag{
+
+  font-size: 12px;
+  border:1px solid #fff;
+  padding:2px 5px;
+  border-radius:3px;
+}
+
+.tag:hover{
+
+  border:1px solid #fff;
+  text-decoration: none;
+}
+
+.tag-list {
+  margin-bottom: -17px;
+  margin-top: 5px;
 }

@@ -186,14 +186,16 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#"><img src="img/music.png"></a>
+              <a class="navbar-brand" href="{!!URL::to('/')!!}" id='navbar-brand'>Mazaj</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Playlists</a></li>
+                
+                <li><a href="{!!URL::to('upload')!!}">Upload</a></li>
+                <li><a href="{!!URL::to('/')!!}/tags">Tags</a></li>
+                
               </ul>
               <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
@@ -202,7 +204,7 @@
                 <button type="submit" class="btn btn-default nav-search"><span class="glyphicon glyphicon-search"></span> </button>
               </form>
               <ul class="nav navbar-nav navbar-right navbar-music ">
-                <li><a href="{!!URL::to('upload')!!}">Upload</a></li>
+                
                   <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img src="{{Nav::avatar(Auth::user()->id)}}" height="19px" width="19px"> {{Auth::user()->username}}<span class="caret"></span></a>
                       <ul class="dropdown-menu" role="menu">
@@ -216,7 +218,7 @@
                       </ul>
                   </li>     
                  
-                 <li id='show-notif'>
+                 <!--li id='show-notif'>
                  <a href="#" class="btn btn-link"><i class="fa fa-bell"></i></a>
                    <span class="navbar-text mazaj-count ">
                       
@@ -228,7 +230,7 @@
                    <span class="navbar-text mazaj-count ">
                      
                   </span>
-                 </li>
+                 </li -->
 
 
                      
