@@ -1,5 +1,5 @@
 @foreach($lists as $list)
-<?php dd($list->tracks); ?>
+
 <div class="list container-fluid" listid="$list->id">
 	<div class="row">
 		<div class="col-lg-8">
