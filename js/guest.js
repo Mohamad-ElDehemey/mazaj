@@ -1,6 +1,14 @@
 jQuery(document).ready(main);
 function main(){
 
+	$('#s').click(function(event){
+
+		event.preventDefault();
+		var term = $('#term').val();
+		window.location = BASE+'/s/'+term;
+
+	});
+
 	//retrieve messages count
 	$.ajax({
 		url: BASE+'/message/msgcount',

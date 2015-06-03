@@ -1,69 +1,6 @@
 @extends('feeds')
 @section('main')
 
-<!-- 
-========== ADD TO PLAYLIST ==============
--->
-{!!Form::token()!!}
-<div class="modal fade" id='add-to-pl'>
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        
-        <div class="new-pl">
-          {!!Form::open([
-              'class' =>'form-inline'
-          ])!!}
-            <div class="form-group">
-              {!!Form::input('text','name','',[
-
-              'class'       =>'form-control',
-              'placeholder' =>'Playlist name',
-              'id'          => 'list-name'    
-              ])!!}
-
-                <button type="submit" id='cr-new-pl'  class='btn btn-warning' name='submit'>New playlist</button>
-            </div>
-        </div>
-
-        <div class="old-pl">
-          <div class="list container-fluid" listid='2'>
-            <div class="row">
-              <div class="col-lg-8">
-
-                <a href='#' class='list-name'>First pl</a>
-            
-              </div>
-              <div class="col-lg-4">
-                <button type="button" class="btn btn-success btn-sm add-to-list pull-right"><span class="glyphicon glyphicon-ok"></span></button>
-              </div>
-            </div>
-          </div>
-
-
-                    <div class="list container-fluid" listid='1'>
-            <div class="row">
-              <div class="col-lg-8">
-
-                <strong class='btn-link list-name '>First pl</strong>
-            
-              </div>
-              <div class="col-lg-4">
-                <button type="button" class="btn btn-danger btn-sm add-to-list pull-right"><span class="glyphicon glyphicon-remove"></span></button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
 
 <div class="col-lg-8">
 
@@ -78,15 +15,16 @@
 
                   <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
                     <h1 class='tab-head'>
-                     Search results for TERM
+                     Search results for {!!$term!!}
                     </h1>
 
                     <div class="tab-content">
                       
                       <div class="container-fluid stream">
           
+         @if(Auth::check())
           @if($posts->count())
-					@foreach($posts as $post)
+          @foreach($posts as $post)
 
           <?php 
 
@@ -95,71 +33,89 @@
 
             if(Auth::check()){
 
-              $like = App\Like::where('track_id','=',$post->track->id)->where('user_id','=',Auth::user()->id)->first();
+              $like = App\Like::where('track_id','=',$post->id)->where('user_id','=',Auth::user()->id)->first();
               if($like)
-                $like = true;
+                $liked = true;
 
-              $posted = App\Post::where('user_id','=',Auth::user()->id)->where('track_id','=',$post->track->id)->first();
-              if($posted)
+              $check_post= App\Post::where('user_id','=',Auth::user()->id)->where('track_id','=',$post->id)->first();
+              if($check_post->status)
                 $posted = true;
 
             }
             
           ?>
-					<!-- post item start -->
-                      	<div class="row item-row" id='{!!$post->track->id!!}' status='off' track='{!!$post->track->name!!}.mp3' afterPuase='false'>
-                      		<div class="container-fluid no-padding">
-                      			<div class="row">
-                      				<div class="col-lg-4">
-										<div class='player-post-data'>
-											<img class="img-responsive cover" src='{!!URL::to("/")!!}/storage/pics/{!!$post->track->cover!!}'/>
-										</div>
-							
-                      				</div>
-                      				<div class="col-lg-8 no-padding">
-                      					
-                      					<div class="player-ctrl container-fluid no-padding">
-                      						<div class="row">
-                      							<div class="col-lg-8">
-                      								<a class="btn btn-link prev ctrl-btn"><span class="glyphicon  glyphicon-backward"></span></a>
-                      								<a class="btn btn-link play ctrl-btn"><span class="glyphicon glyphicon-play"></span></a>
-                      								<a class="btn btn-link next ctrl-btn"><span class="glyphicon glyphicon-forward"></span></a>
-                      								<a class="btn btn-link add-to-list ctrl-btn"><span class="glyphicon glyphicon-list-alt"></span></a>
-                      							</div>
-                      							<div class="col-lg-4">
-                      								<div class="action-btn">
-                      									<p>
+          <!-- post item start -->
+                        <div class="row item-row" id='{!!$post->id!!}' status='off' track='{!!$post->name!!}.mp3' afterPuase='false'>
+                          <div class="container-fluid no-padding">
+                            <div class="row">
+                              <div class="col-lg-4">
+                    <div class='player-post-data'>
+                      <img class="img-responsive cover" src='{!!URL::to("/")!!}/storage/pics/{!!$post->cover!!}'/>
+                    </div>
+              
+                              </div>
+                              <div class="col-lg-8 no-padding">
+                                
+                                <div class="player-ctrl container-fluid no-padding">
+                                  <div class="row">
+                                    <div class="col-lg-8">
+                                      <a class="btn btn-link prev ctrl-btn"><span class="glyphicon  glyphicon-backward"></span></a>
+                                      <a class="btn btn-link play ctrl-btn"><span class="glyphicon glyphicon-play"></span></a>
+                                      <a class="btn btn-link next ctrl-btn"><span class="glyphicon glyphicon-forward"></span></a>
+                                      <a class="btn btn-link add-to-list ctrl-btn"><span class="glyphicon glyphicon-list-alt"></span></a>
+
+                            
+                              
+                            
+                            <?php
+                              $tags = App\Track::find($post->id)->tag('track_id','=',$post->id)->get();
+                             ?>
+
+                             @if($tags)
+                         <div class='tag-list'>
+                             @foreach($tags as $tag)
+                                      <a class="btn btn-link ctrl-btn tag" href='{!!URL::to('/')!!}/tag/id/{!!$tag->id!!}'>
+                                        #{!!$tag->name!!}
+                                      </span></a>
+                              @endforeach
+                        </div>
+                              @endif      
+                          
+                                    </div>
+                                    <div class="col-lg-4">
+                                      <div class="action-btn">
+                                        <p>
                                           <a type="button" class="btn btn-link share ctrl-btn @if($posted) used-btn @endif" action='@if($posted)unshare @else share @endif'>
                                             <span class="glyphicon glyphicon-retweet"></span>
                                           </a>
                                         </p>
-                      									
-                      								</div>
-                      								<div class="action-btn">
-                      									<p><a type="button" class="btn btn-link share ctrl-btn @if($liked)used-btn @endif" action='@if($liked)unlike @else like @endif'><span class="fa fa-heart"></span></a></p>
-                      									<p class='action-count'>{!!App\Like::where('track_id','=',$post->track->id)->get()->count()!!}</p>
-                      								</div>
-                      							</div>
-                      						</div>
-                      					</div>
+                                        
+                                      </div>
+                                      <div class="action-btn">
+                                        <p><a type="button" class="btn btn-link share ctrl-btn @if($liked)used-btn @endif" action='@if($liked)unlike @else like @endif'><span class="fa fa-heart"></span></a></p>
+                                        <p class='action-count'>{!!App\Like::where('track_id','=',$post->id)->get()->count()!!}</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
 
-                      					<div class="track-name container-fluid">
-                      						<div class="row">
-                      							<div class="col-lg-6">
-                      								<p>
-                      								<strong>{{$post->track->title}}</strong>
-                      								<a class="track-owner" href='{!!URL::to("/")!!}/user/profile/{!!$post->user->id!!}'>{{$post->user->username}}</a>
-                      								</p>
-                      								
-                      							</div>
+                                <div class="track-name container-fluid">
+                                  <div class="row">
+                                    <div class="col-lg-6">
+                                      <p>
+                                      <strong>{{$post->title}}</strong>
+                                      <a class="track-owner" href='{!!URL::to("/")!!}/user/profile/{!!$post->user->id!!}'>{{$post->user->username}}</a>
+                                      </p>
+                                      
+                                    </div>
                                     <div class="col-lg-6 rate">
                               <?php 
                                 $rate = '';
                                 if(Auth::check()):
                                 $rate = App\Rate::where('user_id','=',Auth::user()->id)
-                                                ->where('track_id','=',$post->track->id)->first();
+                                                ->where('track_id','=',$post->id)->first();
                                 if($rate)
-                                $rate = $rate->rate;
+                                $rate = $rate->rate/2;
                                 endif;
                               ?>
 
@@ -181,32 +137,35 @@
 
 
                                     </div>
-                      						</div>
-                      					</div> 
+                                  </div>
+                                </div> 
 
-                      					<div class="track-seeker container-fluid">
-                      						<div class="timer seeker-div">
-                      							<p></p>
-                      						</div>
-                      						<div class="seeker-div seeker">
-                      							<div class="seeker-inner"></div>
-                      						</div>
-                      					</div>
-                      				</div>
-                      			</div>
-                      		</div>
-                      	</div>
-					<!-- post item end -->
+                                <div class="track-seeker container-fluid">
+                                  <div class="timer seeker-div">
+                                    <p></p>
+                                  </div>
+                                  <div class="seeker-div seeker">
+                                    <div class="seeker-inner"></div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+          <!-- post item end -->
           @endforeach
           @else
             <p>Sorry, There are no music to view, Be the first publisher. <a href="{!!URL::to('upload')!!}">Upload</a> your awesom music!</p>
+          @endif
+          @else
+          VISITOR
           @endif
 
         
 
                       </div>
 
-
+  {!!$posts->render()!!}
                     </div>
                   </div>
                   <div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab">

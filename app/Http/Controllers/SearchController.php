@@ -4,7 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use App\Post;
+use App\Track;
 class SearchController extends Controller {
 
 	/**
@@ -16,8 +16,16 @@ class SearchController extends Controller {
 	{
 		//
 
-		$posts = Post::paginate(5);
-		return view('search')->with('posts',$posts);
+		$posts = Track::with('user')->whereRaw(
+
+			"MATCH(title) AGAINST(? IN BOOLEAN MODE)",
+			array($term)
+
+		)->orderBy('created_at','DESC')->paginate(9);
+
+		return view('search')
+		->with('posts',$posts)
+		->with('term',$term);
 	}
 
 

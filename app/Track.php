@@ -25,7 +25,7 @@ class Track extends Model {
 
 	public function playlists(){
 
-		return $this->hasMany('App\Playlist');
+		return $this->belongsToMany('App\Playlist','playlist_track');
 	}
 
 }

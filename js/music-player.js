@@ -245,8 +245,6 @@ if(action=='unshare '){
 				this_btn.children('.fa').removeClass('fa fa-spinner fa-spin').addClass('glyphicon glyphicon-retweet');
 				this_btn.removeClass('used-btn').attr('action',' share ');
 				this_btn.closest('.action-btn').find('.action-count').html(result);
-
-
 				
 			}
 		});
@@ -406,6 +404,7 @@ $('#cr-new-pl').click(function(event){
 
 			$('.old-pl').append(result);
 			this_btn.html('New Playlist');
+			
 		}
 	})
 	
@@ -418,39 +417,97 @@ $('.add-to-list').click(function(event){
 
 	$('#add-to-pl').modal('show');
 
-	/**
-*--------------------------------------------
-* View user play lists
-*--------------------------------------------
-*/
+		/**
+	*--------------------------------------------
+	* View user play lists
+	*--------------------------------------------
+	*/
 
-var track_id = $(this).closest('.item-row').attr('id');
-$.ajax({
-	url: BASE+'/playlist/all',
-	type: 'default GET (Other values: POST)',
-	dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
-	data: {param1: 'value1'},
-})
-.done(function() {
-	console.log("success");
-})
-.fail(function() {
-	console.log("error");
-})
-.always(function() {
-	console.log("complete");
-});
+	var track_id = $(this).closest('.item-row').attr('id');
+	var loading = '<div class="loading-animation"><i class="fa fa-spinner fa-spin fa-3x"></i></div>';
+
+	$.ajax({
+		url: BASE+'/playlist/all',
+		type: 'POST',
+		data: {
+
+		_token : $('input[name="_token"]').val(),
+		track_id:track_id
+
+		},
+		beforeSend:function(){
+			$('.old-pl').html(loading);
+		},
+		success: function(result){
+
+			$('.old-pl').html(result);
 
 
+			/*
+			*-------------------------------------------
+			* ADD TO PLAYLIST
+			*-------------------------------------------
+			*/
 
-/*
-*-------------------------------------------
-* ADD TO PLAYLIST
-*-------------------------------------------
-*/
+			$('.add-to-list-btn').click(function(event){
 
-	
-});
+				event.preventDefault();
+				var this_btn = $(this);
+				var action = this_btn.attr('action');
+				var url = BASE+'/playlist/add';
+
+				var addC = 'glyphicon-remove';
+				var remC = 'glyphicon-ok';
+
+				var thisAddC = 'btn-danger';
+				var thisRemC = 'btn-success';
+				var newAction = 'remove';
+
+				if(action == 'remove'){
+
+					url = BASE+'/playlist/remove';
+
+					addC =' glyphicon-ok';
+					remC ='glyphicon-remove';
+
+					thisAddC = 'btn-success';
+					thisRemC = 'btn-danger';
+
+					newAction ='add';
+				}
+				var list_id = this_btn.attr('list');
+
+				$.ajax({
+					url: url,
+					type: 'POST',
+					data: {
+
+						_token : $('input[name="_token"]').val(),
+						list_id:list_id,
+						track_id:track_id
+					},
+					success:function(result){
+
+						console.log(result);
+					}
+				})
+				.done(function() {
+					this_btn.removeClass(thisRemC).addClass(thisAddC);
+					this_btn.find('.glyphicon').removeClass(remC).addClass(addC);
+					this_btn.attr('action',newAction);
+				})
+				.fail(function() {
+					console.log("error");
+				})
+				
+			});
+			
+		}
+	});
+		
+	});
+
+
 
 
 

@@ -31,7 +31,7 @@ class FeedController extends Controller {
 			})
 			->orWhere('user_id','=',Auth::user()->id)
 			->orderBy('created_at','DESC')
-			->paginate(7);
+			->paginate(9);
 			
 			
 
@@ -41,7 +41,7 @@ class FeedController extends Controller {
 			// GENERIC LATEST FEED
 			$posts = Post::with('user')
 			->orderBy('created_at','DESC')
-			->paginate(7);
+			->paginate(9);
 			
 		}
 

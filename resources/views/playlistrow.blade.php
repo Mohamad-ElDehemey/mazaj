@@ -6,7 +6,7 @@
 
 			</div>
 			<div class="col-lg-4">
-				<button type="button" class="btn btn-success btn-sm add-to-list pull-right"><span class="glyphicon glyphicon-ok"></span></button>
+				<button type="button" class="btn btn-success btn-sm add-to-list pull-right disabled"><span class="glyphicon glyphicon-ok"></span></button>
 			</div>
 		</div>
 	</div>

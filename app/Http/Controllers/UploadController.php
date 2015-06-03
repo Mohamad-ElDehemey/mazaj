@@ -13,6 +13,7 @@ use Redirect;
 use App\Track;
 use App\Post;
 use App\Tag;
+use App\Rate;
 
 class UploadController extends Controller {
 
@@ -115,10 +116,20 @@ class UploadController extends Controller {
 				$post = Post::create([
 
 						'user_id' 	=>Auth::user()->id,
-						'track_id'	=>$track->id
+						'track_id'	=>$track->id,
+
 
 					]);
 
+				$rate = Rate::create([
+
+						'user_id' 	=> Auth::user()->id,
+						'track_id'	=>$track->id,
+						'isexplicit' =>false,
+						'rate'		=>1,
+						'shared'	=>1,
+						'isexplicit' =>false
+					]);
 
 				return Redirect('/');
 			}

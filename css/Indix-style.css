@@ -741,3 +741,27 @@ body{
   margin-bottom: -17px;
   margin-top: 5px;
 }
+
+
+.old-pl>.loading-animation{
+
+  width:45px;
+  height:45px;
+  margin:auto;
+  display: block;
+  text-align: center;
+  color: #b7b7b7;
+}
+
+h3.pl-k-title {
+  color: #ddd;
+  position: absolute;
+  font-size: 14px;
+  top: 0px;
+  left: 35px;
+}
+
+.list-playlist img {
+  width: 220px;
+  height: 157px;
+}

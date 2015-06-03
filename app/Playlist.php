@@ -7,6 +7,10 @@ class Playlist extends Model {
 	//
 	protected $fillable = ['user_id','name'];
 
-	
+	public function tracks(){
+
+
+		return $this->belongsToMany('App\Track','playlist_track');
+	}
 
 }

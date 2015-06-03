@@ -8,7 +8,7 @@ use Auth;
 use Hash;
 use App\Post;
 use App\Follow;
-
+use App\Playlist;
 
 class UserController extends Controller {
 
@@ -19,14 +19,19 @@ class UserController extends Controller {
 			return redirect('/');
 
 
-		$posts = Post::with('user')->where('user_id','=',$id)->orderBy('created_at','DESC')->paginate(7);
+		$posts = Post::with('user')->where('user_id','=',$id)->orderBy('created_at','DESC')->paginate(9);
+		$follows=false;
+		if(Auth::check())
 		$follows = Follow::where('follower_id','=',Auth::user()->id)->first();
 		
+
+		$playlists = Playlist::with('tracks')->where('user_id','=',$id)->get();
 
 		return view('profile')
 		->with('posts',$posts)
 		->with('user',$user)
-		->with('follows',$follows);
+		->with('follows',$follows)
+		->with('playlists', $playlists);
 	}
 
 	// REGISTERATION

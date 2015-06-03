@@ -14,6 +14,70 @@
         {!!Html::style('css/Indix-style.css')!!}
 
     </head>
+
+ <!-- 
+========== ADD TO PLAYLIST ==============
+-->
+{!!Form::token()!!}
+<div class="modal fade" id='add-to-pl'>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        
+        <div class="new-pl">
+          {!!Form::open([
+              'class' =>'form-inline'
+          ])!!}
+            <div class="form-group">
+              {!!Form::input('text','name','',[
+
+              'class'       =>'form-control',
+              'placeholder' =>'Playlist name',
+              'id'          => 'list-name'    
+              ])!!}
+
+                <button type="submit" id='cr-new-pl'  class='btn btn-warning' name='submit'>New playlist</button>
+            </div>
+        </div>
+
+        <div class="old-pl">
+          <div class="list container-fluid" listid='2'>
+            <div class="row">
+              <div class="col-lg-8">
+
+                <a href='#' class='list-name'>First pl</a>
+            
+              </div>
+              <div class="col-lg-4">
+                <button type="button" class="btn btn-success btn-sm add-to-list pull-right"><span class="glyphicon glyphicon-ok"></span></button>
+              </div>
+            </div>
+          </div>
+
+
+                    <div class="list container-fluid" listid='1'>
+            <div class="row">
+              <div class="col-lg-8">
+
+                <strong class='btn-link list-name '>First pl</strong>
+            
+              </div>
+              <div class="col-lg-4">
+                <button type="button" class="btn btn-danger btn-sm add-to-list pull-right"><span class="glyphicon glyphicon-remove"></span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 @if(!Auth::check())
     <!-- Register modal begin-->
       <div class="modal fade" id="register-modal">
@@ -175,6 +239,8 @@
 </div><!-- /.modal -->
   @endif
  <!-- messages modal end -->   
+
+
     @if(Auth::check())
         <nav class="navbar navbar-default navbar-default-music navbar-fixed-top">
           <div class="container-fluid">
@@ -199,9 +265,9 @@
               </ul>
               <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Find Your Taste ...">
+                  <input type="text" class="form-control" placeholder="Find Your Taste ..." id='term' />
                 </div>
-                <button type="submit" class="btn btn-default nav-search"><span class="glyphicon glyphicon-search"></span> </button>
+                <button type="submit" class="btn btn-default nav-search" id='s'><span class="glyphicon glyphicon-search"></span> </button>
               </form>
               <ul class="nav navbar-nav navbar-right navbar-music ">
                 

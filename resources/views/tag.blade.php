@@ -1,69 +1,6 @@
 @extends('feeds')
 @section('main')
 
-<!-- 
-========== ADD TO PLAYLIST ==============
--->
-{!!Form::token()!!}
-<div class="modal fade" id='add-to-pl'>
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        
-        <div class="new-pl">
-          {!!Form::open([
-              'class' =>'form-inline'
-          ])!!}
-            <div class="form-group">
-              {!!Form::input('text','name','',[
-
-              'class'       =>'form-control',
-              'placeholder' =>'Playlist name',
-              'id'          => 'list-name'    
-              ])!!}
-
-                <button type="submit" id='cr-new-pl'  class='btn btn-warning' name='submit'>New playlist</button>
-            </div>
-        </div>
-
-        <div class="old-pl">
-          <div class="list container-fluid" listid='2'>
-            <div class="row">
-              <div class="col-lg-8">
-
-                <a href='#' class='list-name'>First pl</a>
-            
-              </div>
-              <div class="col-lg-4">
-                <button type="button" class="btn btn-success btn-sm add-to-list pull-right"><span class="glyphicon glyphicon-ok"></span></button>
-              </div>
-            </div>
-          </div>
-
-
-                    <div class="list container-fluid" listid='1'>
-            <div class="row">
-              <div class="col-lg-8">
-
-                <strong class='btn-link list-name '>First pl</strong>
-            
-              </div>
-              <div class="col-lg-4">
-                <button type="button" class="btn btn-danger btn-sm add-to-list pull-right"><span class="glyphicon glyphicon-remove"></span></button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
 
 <div class="col-lg-8">
 
@@ -98,7 +35,7 @@
 
               $like = App\Like::where('track_id','=',$post->id)->where('user_id','=',Auth::user()->id)->first();
               if($like)
-                $like = true;
+                $liked = true;
 
               $posted = App\Post::where('user_id','=',Auth::user()->id)->where('track_id','=',$post->id)->first();
               if($posted)
@@ -135,7 +72,7 @@
                              @if($tags)
                          <div class='tag-list'>
                              @foreach($tags as $tag)
-                                      <a class="btn btn-link add-to-list ctrl-btn tag" href='{!!URL::to('/')!!}/tag/id/{!!$tag->id!!}'>
+                                      <a class="btn btn-link ctrl-btn tag" href='{!!URL::to('/')!!}/tag/id/{!!$tag->id!!}'>
                                         #{!!$tag->name!!}
                                       </span></a>
                               @endforeach
@@ -224,7 +161,7 @@
 
                       </div>
 
-
+  {!!$posts->render()!!}
                     </div>
                   </div>
                   <div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab">

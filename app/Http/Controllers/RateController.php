@@ -47,7 +47,7 @@ class RateController extends Controller {
 		$rate = Rate::where('user_id','=',$user_id)->where('track_id','=',$track_id)->first();
 		if($rate){
 
-			$rate->rate = $value;
+			$rate->rate = $value*2;
 			$rate->isexplicit = true;
 			$rate->save();
 
@@ -55,7 +55,7 @@ class RateController extends Controller {
 
 			$rate =  Rate::create([
 
-			'rate'			=> $value,
+			'rate'			=> $value*2,
 			'isexplicit'	=>true,
 			'user_id' 		=>Auth::user()->id,
 			'track_id'		=>$track_id

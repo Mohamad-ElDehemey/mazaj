@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\App;
 use App\User;
 use Auth;
 use App\Follow;
+use App\Playlist;
+use App\Track;
+use App\Pl;
+use URL;
 
 class Nav {
 
@@ -36,7 +40,20 @@ class Nav {
    	return $followers;
    }
 
+   public function pl_cover($id){
+	   	$cover = URL::to('/').'/storage/pics/def.png';
+	   	$track = Pl::where('playlist_id','=',$id)->first();
 
+	   	if($track){
+
+	   	$track = Track::find($track->track_id);
+	   	$cover = URL::to('/').'/storage/pics/'.$track->cover;
+	   	}
+
+	   	return $cover;
+
+
+   }
 
 
 }
